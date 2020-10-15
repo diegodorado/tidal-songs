@@ -1,0 +1,14 @@
+
+d1 $ stut' 8 0.25 ((|*| gain "0.9") . (# speed (every 2  (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)"
+
+d2 $ sound "jvbass*3"
+  # gain "[1.18 0.8/2 0.9]"
+  # up "[1 -3 -6 -1]/8"
+
+d3 $ stut' 4 0.125 ((|-| crush 1 ).(|*| gain 0.975 )) $
+  whenmod 32 16 (#n ("[[7,12] [3,10] [[15 14],7] [5,[12 9]]]/8" + "-12"))
+  $ n "[[17,12] [19,10] [[19 21],7] [5,[22 24]]]/8" |+| n "-12"
+  # s "superpiano" # sustain 2 # crush 8 # gain 0.9
+
+d4 $ whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]")
+  $ sound "bd hh*2 [sn:3 sn:3?] hh*2"

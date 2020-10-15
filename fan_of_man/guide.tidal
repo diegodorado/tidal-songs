@@ -1,0 +1,192 @@
+
+setcps 0.5
+
+d1 $ note (scale "spanish" $ "0 .. 3 3 .. 0") # sound "midi" # midichan 5
+
+
+d1 $ note (scale "spanish" $ round <$> ( segment 6 $ range 0 8 $ tri)) # sound "midi" # midichan 5
+
+
+d1 $ note (scale "spanish" $ round <$> ( segment 6 $ range 0 8 $ sine)) # sound "midi" # midichan 5
+
+
+d1 $ note (scale "spanish" $ round <$> ( segment 6 $ range 0 "<12 8>" $ sine)) # sound "midi" # midichan 5
+
+
+d1 $ note (scale "spanish" $ round <$> ( segment 6 $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5
+
+
+d1 $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5
+
+
+
+d1 $ off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) #
+sound "midi" # midichan 5
+
+do
+  d1 $ stack[
+    s "[swbd swbd*3?]" # orbit 3 # room 0.3 # gain 1.1,
+    off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) #
+    sound "midi" # midichan 5,
+    s "~" ]
+
+do
+  d1 $ stack[
+    s "[swbd swbd*3?]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n "0*4"+(irand 4),
+    off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) #
+    sound "midi" # midichan 5,
+    s "~" ]
+
+setcps 0.5
+
+do
+  d1 $ stack[
+    s "[swbd swbd*3?]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n "0*4"+(irand 4),
+    within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) #
+    sound "midi" # midichan 5,
+    s "~" ]
+
+
+
+do
+  d1 $ stack[
+    --s "[swbd swbd*3?]" # orbit 3 # room 0.3 # gain 1.1,
+    --jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n "0*4"+(irand 4),
+    off (0.3/"4 8") (degrade.(# speed 1.03)) $ sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)-14) # sound "midi" # midichan 0,
+    s "~" ]
+
+
+do
+  d1 $ stack[
+    --s "[swbd swbd*3?]" # orbit 3 # room 0.3 # gain 1.1,
+    --jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n "0*4"+(irand 4),
+    off (0.3/"4 8") (degrade.(# speed 1.03)) $ sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7) # sound "midi" # midichan 0,
+    s "~" ]
+
+
+
+do
+  d1 $ stack[
+    s "[swbd swbd*3?]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+"[0 3 4]/12") # sound "midi" # midichan 0,
+    s "~" ]
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    s "~" ]
+
+
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]
+
+setcps 0.54
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    note (scale "spanish" $ round <$> ( segment "<4> <3 6>" $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]
+
+
+
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    note (scale "spanish" $ off 0.3 (+7) $ round <$> ( segment "<4> <3 6>" $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]
+
+
+
+
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    --sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    --note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    --note (scale "spanish" $ off 0.3 (+7) $ round <$> ( segment "<4> <3 6>" $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]
+
+
+
+
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    --s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    --jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    --note (scale "spanish" $ off 0.3 (+7) $ round <$> ( segment "<4> <3 6>" $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]
+
+
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    --s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    --jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (choose([1,2])),
+    s "chant" # n "[0 3 3 0 [6 8] 8]/12" # shape 0.3 # gain 1.2 # orbit 1 # delay 0.5 # delayt 0.66 # delayfb 0.6,
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    --note (scale "spanish" $ off 0.3 (+7) $ round <$> ( segment "<4> <3 6>" $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]
+
+
+
+
+
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" # orbit 3 # room 0.3 # gain 1.1,
+    jux (rev) $ struct "t(7,12,<0 1 2>)" $ s "feel" # n (fast 4 $ choose([1,2])),
+    s "chant" # n "[0 3 8]/6" # shape 0.3 # gain 1.2 # orbit 2 # delay 0.5 # delayt 0.66 # delayfb 0.6,
+    sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2" # vowel "<a e o>",
+    --off 0 ((|-| note "12").(# midichan 0)) $ note (scale "spanish" $ round <$> ( segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # sound "midi" # midichan 5,
+    note (scale "spanish" $ round <$> ( segment (choose([1,3,6,12])) $ range 0 7 $ sine)-7+pat) # sound "midi" # midichan 0,
+    note (scale "spanish" $ off 0.3 (+7) $ round <$> ( segment "<4> <3 6>" $ range 0 10 $ tri)-7+pat) # sound "midi" # midichan 2 ,
+    s "~" ]

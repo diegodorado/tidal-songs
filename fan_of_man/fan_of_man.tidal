@@ -1,0 +1,60 @@
+
+
+let ns pp = note (scale "spanish" $  pp)
+    pat = "[0 3 4]/12"
+    nseg ss pp = (round <$> (segment ss $ pp))
+    nss ss pp = ns (nseg ss pp)
+    pats =
+      [
+        ("intro", nss 6 (range 0 "<12 8>" $ sine+0.2*rand) # midi 5),
+        ("intro2", nss (2 * irand 4) (range 0 "<12 8>" $ sine+0.2*rand) # midi 5),
+        ("intro3", nss (2 * irand 4) (range 0 "<12 8>" $ sine+0.2*rand) + stack[midi 5,midi 0 -note 12]),
+        ("bridge", nss (choose([1,3,6,12])) (sine*12+rand*3) + stack[midi 5,midi 0 -note 12]),
+        ("bridge2", nss (choose([1,3,6,12])) (sine*12+rand*3) +midi 0 -note 12),
+        ("bb", s "swbd swbd*3?" # gain 1.1 # orbit 3 # room 0.2),
+        ("perc", jux(rev) $ struct "t(<5 7>,12,<0 0 2>)" $ s"feel" # n (choose [1,5])),
+        ("bs", s "swbd(<4 3>,6,<0 2>) <swsn swsn:3*6?>" # gain 1.1 # orbit 3 # room 0.2),
+        ("tabla0", n (run 12) # s "tabla2"# orbit 2 # room 0.2 # size 0.6 # gain 0.85) ,
+        ("tabla", within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2"# orbit 2 # room 0.2 # size 0.6) ,
+        ("tabla2", off (0.3/"4 8") (degrade.(# speed 1.03)) $ sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2"# orbit 2 # room 0.2 # size 0.6) ,
+        ("tabla3", n ("0*12"+irand 12) + s "bass2 tabla2 drum bass" # cut 5 # shape 0.3 # orbit 2 # room 0.2 # size 0.6) ,
+        ("slowtabla", slow 2 $ off (0.3/"4 8") (degrade.(# speed 1.03)) $ sometimes (slow 2 ) $ within (0.75, 1) (sometimes (fast 2 )) $ n (run 12) # s "tabla2"# orbit 2 # room 0.2 # size 0.6) ,
+        ("bass", nss (choose [1,3,6,12] ) ((range 0 7 $ sine)-7+pat) # midi 0),
+        ("str", ns (nseg "<4> <3 6>" (range 0 10 $ tri)-7+pat) # midi 2),
+        ("str2", ns (off 0.3 (+7) $ nseg "<4> <3 6>" (range 0 10 $ tri)-7+pat) # midi 2),
+        ("choir", s "chant" # n "[0 3 3 0 [6 8] 8]/12" # shape 0.3 # gain 1.2 # orbit 1 # delay 0.5 # delayt 0.66 # delayfb 0.6),
+        ("choir2", slow 4 $ striate' "24 48 [24 48]" 0.1 $ n "[0 3 6]/3" # s "chant" # shape 0.6 # gain 1 # orbit 1 # dilei 0.5 0.33 0.7 # room 0.4 # size 0.8 # pan (slow 2 $ 0.5+ sine*0.3)),
+        ("pacino",s "pacino/3" # orbit 3 # shape 0.35 # cut 3),
+        ("null", s "~")
+      ]
+    fx = [
+        ("rand", (# n (choose([1,2])))),
+        ("rand2", (# n ("0*4"+choose([1,2,3,4,5])))),
+        ("mono", (# n 0)),
+        ("2nd", (# n 1)),
+        ("fan", (# n 2)),
+        ("naf", (# speed (-1)).(#n 3).(#cut 4)),
+        ("vowel", ( # vowel "<a e o>")),
+        ("double", ( # speed "[0.5,1]")),
+        ("null", (|*| gain 1) )
+      ]
+in
+d1 $ ur 12 (cat [
+  "[intro [tabla0,intro2] [tabla0,intro3,[~ perc]]]",
+  "[bb,tabla0,intro3, perc]",
+  "[bb, bass, perc, tabla]",
+  "[bb, bass, perc, tabla, str]",
+  "[bs, bass, perc, tabla2, str2]",
+  "[bb, tabla3, bridge, perc]",
+  "[bb, [perc perc:rand] , [pacino ~], [~ tabla:vowel], [~ bridge2]]",
+  "[bb, perc:rand, bridge2, [tabla tabla2]]",
+  "[bs, bass,perc:rand,tabla2 , [pacino:2nd ~@11], str2]",
+  "[bs, bass,perc:rand2,tabla2 , [pacino:fan ~@11], str2,choir:mono]",
+  "[bb, tabla3, bridge, perc, [~ tabla]]",
+  "[bs, bass,perc:rand2,tabla2 , [pacino ~@11], str2,choir]",
+  "[bs, bass,perc:rand2,tabla2 , [pacino:2nd ~@11], str2,choir]",
+  "[bs, bass,perc:rand2,perc:rand2,tabla2 , [pacino:fan ~@11], str2,choir2]",
+  "[bb, bridge, perc,[~ pacino:naf], tabla3]",
+  "[bs, bass,perc:rand2,slowtabla , [pacino:fan ~@11],choir2:double]",
+  "slowtabla ~@2"
+  ]) pats fx # cps 0.54

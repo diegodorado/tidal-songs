@@ -1,0 +1,26 @@
+-- uses rhodes and bass8
+
+cps 0.45
+
+import qualified Sound.Tidal.Scales as Scales
+
+let tone = toScale (Scales.aeolian)
+
+let shh = (#gain 0)
+
+
+d1 $  stack[
+  s "[[bd:4*2 ~] sn:3]*2" # orbit 2 # room 0.22,
+  n ("1*16"+(irand 2)) # s "feel" # gain ("0.9*32"+tri*0.2),
+  n (tone $ every 2 (off 0.44 (+"[14,7,<10 12>]")) $"[[<0*2 [0..3]>] [<7*2? <[10..8] 5*2>> [4 7]]]*2"
+    + "[0 -1 -2 -1]/4")
+    # s "bass8" # shape 0.45 # gain ("0.9*32"+rand*0.1),
+  n (tone $ every 3 (off 0.44 (+"[14,7,<10 12>]")) $ "[[0 0(3,8)?] [-1(3,8) -1*2] -2 [-3(3,8) -4(7,8)]]/4"
+    + "[[0,2,4,6],[8,10]?]") # s "rhodes"
+    # accelerate (scale 0.1 5  $ slow 2.3 $ tri) # gain 0.9
+    # delay 0.3 # delayt 0.44 #delayfb 0.35 # orbit 1,
+  n (tone $ "[0 1 2 [3 4] 7 [5 4 3] 2 1]/8")
+    # s "cs80lead" #cut 1 # gain 0.89
+      # lpf (scale 3000 10000 $ slow 4.3 $ sine)
+      # lpq 0.2
+]

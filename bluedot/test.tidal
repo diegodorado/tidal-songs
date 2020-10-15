@@ -1,0 +1,51 @@
+
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+      bass = "[ ~ [0|7]!3]*2"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m4 $ ns ("[0,2,<4 5>]"  +|b |+7) # sus 0.3
+  d7 $ sides 100 # radius 10 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+
+
+
+
+
+
+
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0@2 2 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7 ]}%4"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m1 $ ns ("[0,2,4,6,< 10 9 8>]"  +|b |-7)
+  m4 $ nsr ("0" |+rand*9) # sus 0.5 # gain 1.1
+  d0 $ whenmod 16 14 (const $ s "impact*8" # cut 6 # n (irand 10) # hpf 300 # orbit 5 # shape 0.25 ) $ slow 1 $ s "bd sn:5" 
+  m3 $ ns ("[~ 7!3]*2"  |+b |-7) # gain 0.99 
+  d1 $ s " ~ [hh|hh:4] oh:3 hh*2" + dilei 0.5 0.25 0.4
+  m2 $ mono $ nsr (slow 2 $ struct "1(<9 13>,16, <0 1 2>)" melo ) 
+    # sus (slow 4 $ perlin*0.5) 
+    # gain 1.1
+  d7 $ sides (slow 2 "[4 8 12 24]/4")  
+    # beat 1
+    # radius 400 
+    # hue (rand*360) 
+    # variation 3 
+    # speed (slow 4 $ 900+sine*900)
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+cps 1
+
+d2 $ stack[
+  s "sync", -- no sound, just sync
+  s "veda*4"
+]

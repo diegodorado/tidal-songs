@@ -1,0 +1,25 @@
+import qualified Sound.Tidal.Scales as Scales
+
+let ns = n . toScale Scales.aeolian
+    pat = "[7 3 7 3 [4 5] [3 4] [5 6] 4 ]/32"
+
+d1 $ stack[
+  ns (sometimes (rev) $ sometimes (off 0.5 (+"7")) $ sometimes (off 0.25 (+"[0,12,18]")) $ "[0,2?,4,6?,8,10?]*2"+ "-7" + pat)
+    # s "rhodes" # delay 0.5 #delayt 0.44 #delayfb 0.5,
+  ns ("[-7(7,8)? 0(7,8)? ]/2"+"[<7 [[7,11?,14]]> [0 [0..7]]]/2" + pat) # s "bass8" # shape 0.4 ,
+  slow 8 $ chop 32 $ s "drums" # cut 1 # gain 1.35
+    # room 0.4 # size 0.3 # orbit 2
+]
+
+:load ~/UnityOsc
+
+v1 <- unityStream
+
+v1 $ thing "apple*16" # rigid 1
+  # x "1 2 3"
+  # y "3 1 2 1.2"
+  # z "0 3 1"
+  # vscale "0.2 0.5"
+  # duration 1
+
+d1 $ s "bd sn:3"

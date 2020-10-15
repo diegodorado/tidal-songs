@@ -1,0 +1,520 @@
+
+---
+d1 $ sound "bd:3(3,8)"
+
+---
+d1 $ stut' 8 0.25 (|*| gain 0.9) $ sound "bd:3(3,8)"
+
+---
+d1 $ stut' 8 0.25 ((|*| gain 0.9).(# speed "8")) $ sound "bd:3(3,8)"
+
+---
+d1 $ stut' 8 0.25 ((|*| gain 0.9).(# speed "{8 1 8}%4")) $ sound "bd:3(3,8)"
+
+---
+d1 $ stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)"
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  sound "fm:14" # cut 1
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0.1 0.5 >" # sound "fm:14" # cut 1
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0 [[0 0] [0 [0 0]]]>" # sound "fm:14" # cut 1
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0 [[0.48*50 0.3*50] [0.4*100 [0.77*200 0.49*100]]]>" # sound "fm:14" # cut 1
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>"
+    # sound "fm:14" # cut 1
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>"
+    # sound "fm" # cut 1 # n "[11 12 10 14]/8"
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>"
+  # sound "pad" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9
+]
+
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>"
+  # sound "pad" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  sound "jungbass:3/4" # up "-12"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>"
+  # sound "pad" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-12 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "pad" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4"
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "pad" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16)
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "hh*8"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8" #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 4 $ slow 2 $ chop 8 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  --stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  --sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 4 $ slow 2 $ chop 8 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  --stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  --sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 4 $ slow 2 $ chop 4 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  --stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  --sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 8 $ slow 0.5 $ chop 32 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 8 $ slow 0.5 $ chop 32 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums"
+]
+
+
+
+---
+d1 $ stack[
+  every 1 (|*|gain (scale 1 0.6 $ slow 4 $ tri)) $ stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.2 $ sound "hh*8"
+    # gain "[1 0.9 0.8 0.9]*2"
+    #lpf (scale 2500 10000 $ slow 2.4 $ tri)
+    #lpq 0.2,
+  loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  every 1 (|*|gain (scale 0.6 1 $ slow 3 $ tri)) $ stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm pad>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11 ~ ~ [~ -5]]/4" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums"
+]
+
+
+---
+d1 $ stack[
+  every 1 (|*|gain (scale 0.6 1 $ slow 3 $ tri)) $ stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*64 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # cut 1
+  # sound "<fm>" # cut 1 # n "[11 12 10 14]/8" # crush "[4 8 5 7]/2" # gain 0.9,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums",
+  sound "jvbass*3"
+]
+
+
+
+---
+d1 $ stack[
+  every 1 (|*|gain (scale 0.6 1 $ slow 3 $ tri)) $ stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "whatsapp:4" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums",
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8"
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "whatsapp:4" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  --loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums",
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  --loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums",
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  sound "bd sn:3"
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  sound "fm:11/8" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  slow 8 $ striate' 128 (1/50) $ sound "fm:11*8" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  slow 8 $ jux (#speed 1.01) $ striate' 128 (1/150) $ sound "fm:11" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  slow 8 $ slowspread ($) [(#speed (scale 0.15 2 $ slow 2.5 $ tri))] $ slowspread ($) [(#speed 0.5),(#speed 1),(#crush 4)] $ striate' 1024 (1/100)
+    $ sound "fm:11 fm:10" # cut 1 #delay 0.5 #delayfeedback 0.3 #delaytime 0.25,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  slow 8 $ slowspread ($) [(#speed (scale 0.15 2 $ slow 2.5 $ tri))] $ striate' 1024 (1/100)
+    $ sound "fm:11 fm:10" # cut 1 #delay 0.5 #delayfeedback 0.3 #delaytime 0.25 #crush 4,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  slow 1 $ slowspread ($) [(#speed (scale 0.15 2 $ slow 2.5 $ tri))] $ striate' 1024 (1/100)
+    $ sound "beatbox:3" # cut 1 #delay 0.5 #delayfeedback 0.3 #delaytime 0.25 #crush 4,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  whenmod 8 6 (const $ sound "[bd(3,8),sn:3(7,8)?]") $ sound "bd hh*2 [sn:3 sn:3?] hh*2"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  --loopAt 4 $ every 1 (#gain (scale 0.6 1 $ slow 4 $ tri)) $ chop 16 $ sound "drums",
+  sound "jvbass*3" # gain "1.2 0.8/2 0.9" # up "[0 -4 -7 -2]/8",
+  sound "superpiano/4" |+| n "-13"
+]
+
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.3 $ sound "superpiano" # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8"
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  up "[-11]/16" # sound "jungbass:3" # cut 4,
+  sound "ulgab/4" # n (irand 16),
+  degradeBy 0.3 $ stut' 4 0.125 (|*| gain 0.95) $ sound "superpiano" # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab*2" # n (irand 16),
+  degradeBy 0.3 $ stut' 4 0.125 (|*| gain 0.95) $ sound "superpiano" # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8"
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab*2" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?" # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.95
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  whenmod 8 2 (#gain 0) $ begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "fm:10" # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab(3,8)" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?" # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.95
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "beatbox" # n (slow 8 $ irand 4) # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab(3,8)" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?" # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.92
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  begin "<0*16 [[0.38*8 0.32*8] [0.41*16 [0.17*32 0.39*64]]]>" # sound "beatbox" # n (slow 8 $ irand 4) # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab(3,8)" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?"
+    # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.92
+    # lpf 4000
+]
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  sound "bbox" # n (slow 8 $ irand 4) # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab(3,8)" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?"
+    # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.92
+    # lpf 4000
+]
+
+
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  sound "bbox*8" # n (slow 8 $ irand 4) # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab(3,8)" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?"
+    # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.92
+    # lpf 3000
+]
+
+---
+d1 $ stack[
+  stut' 8 0.25 ((|*| gain 0.9).(# speed (every 2 (0.25 <~) $ "{8 1 8}%4"))) $ sound "bd:3(3,8)",
+  sound "bbox*8" # n (run 9) # cut 1 ,
+  degradeBy 0.25 $ sound "ulgab(3,8)" # n (irand 16),
+  degradeBy 0.2 $ stut' 4 0.125 (|*| gain 0.92) $ sound "superpiano superpiano?"
+    # n "[0,3,7,10]" |+| n "[0 -4 -7 -2]/8" # gain 0.92
+    # lpf 1000
+]
+
+
+---
+d1 $ stack[
+  slowcat [
+    sound "feel*8" # n (slow 1 $ run 16),
+    sound "feel*8" # n (slow 1 $ run 16),
+    sound "feel*8" # n (slow 1 $ run 16),
+    sound "bbox*8" # n (slow 2.5 $ run 9)
+  ]
+]
+
+---
+d1 $ stack[
+  slowcat [
+    sound "feel*8" # n (slow 0.7 $ run 16),
+    sound "feel*8" # n (slow 1.7 $ run 16),
+    sound "feel*8" # n (slow 1.3 $ run 16),
+    sound "bbox*8" # n (fast 2.5 $ run 9)
+  ]
+]

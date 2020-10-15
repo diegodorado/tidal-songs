@@ -1,0 +1,11 @@
+setcps 0.5
+
+do
+  let d = scale "aeolian"
+      pat = "[-2 -1 0 -1]/8"
+  d1 $ stack[
+      s "[swbd ~ [swsn*2 ~] swsn:1,[~ [cp cp*4?]]]/2" # orbit 3 # room 0.3,
+      note (d $ cat[trunc "<0.75 0.5 1 0.25>" $"{<6 [6 7] 4> <0 0*2> ~}%8","{0 [6 7] [~ 0] 14}%8"]-7+pat) # midi 0 # sustain 0.1 # gain 1.2,
+      note (d $ off "<0.125 ~>" (+("[4,[7*2 10*4]]"+(irand 4))) $ (every 4 (fast 4 ) $ "{0 1 2}%4")+7) # s "midi" # midichan "[3,5]" # sustain "<0.1 0.05 0.2>",
+      note (d $ "[0,<2 <2 1>>,<4 <5 3>>,[<7 [13 12]> 8 9 <11 10>]/2]/2"+pat) # midi 2,
+      s "~"]

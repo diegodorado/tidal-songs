@@ -1,0 +1,34 @@
+setcps 0.785
+
+
+d1 $ stack[
+  stack[
+    -- off 0.25 ((# cut 6).(#pan 0.25)) $ loopAt 8 $ shuffle 16 $ striate 64 $ n "[2]" #pan 0.75 # cut 7,
+    loopAt 8 $ shuffle 4 $ striate 64 $ n "[0 1]/2",
+    -- loopAt 8 $ scramble 8 $ (#n "[<0 2> 1]*8") $ striate 32 $ n 1,
+    -- loopAt 4 $ scramble 16 $ striate 16 $ n 3,
+    s "~"
+  ]
+  -- |*| speed (-1)
+  # cut 6
+  # s "rosalia" # dilei 0.05 1 0.3 # orbit 2 # shape 0.35 ,
+  s "[[bd sn@4](<3  <5 7?>>,8,<0 <5 0>>)]" # n 20,
+  fast 2 $
+  every 2 (stut' 2 (0.25) (*speed 1.2)) $
+  s "[~ sn:18]",
+  s "[[bd sn@4](<3 <5 7>>,8)]" # n (slow 4 $ irand 80 ),
+  n ("0(<5 7>,8,<0 1>)"+irand 80 ) # s "hh" # cut 2 # sus 0.1 # gain 1.1,
+  s "[down:0/2]" ,
+  s "cp:10(<3 5 7>,8,<0 1 2 0>)" # cut 5  # orbit 3 # speed (slow 8 $ 1 + saw*0.75) # room 0.13,
+  s "impact:19/8" # cut 10 # gain 1.1,
+  stack[
+    shuffle 4 $ struct "1(<5 7 <3 5>>,8,<0 1>)" $ note ( scale "dorian" $  "[0,2,4](<3 3 3 7>,8)"+"[0 0 2 1]/8"-7 ) # midi 0,
+    slow 4 $ note ( scale "dorian" $  "[0 2 4 6 4 6 8 10]"+"[0]"+"[2 3 0 0]/8" ) # midi 1  ,
+    shuffle 4 $ struct "1(<5 7 <3 5>>,8,<0 1>)" $ note ( scale "dorian" $  "[0 .. 14]/2"+"[0]"+"[0]/8" ) # midi 1 # gain 1.015,
+    note "~"
+  ]  + note 2,
+  -- note ( scale "dorian" $ "[2 3 0 0]/8" ) #  s "drone" # cut 3 # orbit 1 ,
+  -- note ( scale "dorian" $ "[0*2 <~ [~ [<6 8> 7]]>]"+"[2 3 0 0]/8" ) #  s "drone" # cut 3 # orbit 1 # begin 0.5 ,
+  note ( scale "dorian" $ rarely (off 0.125 (+"<2 4> <7 [-1 1]>")) $  (sometimes (slow 2) $ "[0*<2 4> <~ [~ [<6 8> 7]]>]")+"[2 3 0 0]/8" ) #  s "drone" # cut 3 # orbit 1  # sus 0.25 # begin 0.45 # room 0.3,
+  s "~"
+]

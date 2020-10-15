@@ -1,0 +1,66 @@
+let base = "[0 0 2 3]/4"
+
+d9 $ fast "1 2" $ chop 8 $ s "chant:6/4" # shape 0.45 # orbit 4 # cut 4
+
+d4 $ fast 1 $ shuffle 8 $ struct "1(<5 7 <3 5>>,8,<0 1>)" $  note ( scale "dorian" $  "[-7 .. 14]/4" ) # midi 0  + note 2 # gain 1.2
+
+--drone
+d5 $ note ( scale "dorian" $ base ) #  s "drone" # cut 3 # orbit 1 # begin 0.5
+
+d5 $ note ( scale "dorian" $ rarely (off 0.125 (+"<2 4> <7 [-1 1]>")) $  (sometimes (slow 2) $ "[0*<2 4> <~ [~ [<6 8> 7]]>]")+base ) #  s "drone" # cut 3 # orbit 1  # sus 0.25 # begin 0.5
+
+
+
+
+d1 $ stack [
+  s "bd:31*<1 2 1> ~!3",
+  -- sometimes (stut' 10 (0.125) (degrade.(*speed 1.12))) $
+  s "~ sn" # cut "3" #  n "29" # orbit 1 # room 0.5 # size 0.7 #gain 0.9,
+  s "down:0/8" # gain 0.95,
+  s "~ fx:5/6" # gain 1.4,
+  s "~"  ]
+
+
+d1 $ every 8 (const $ s "bd:31*8") $ stack [
+  s "bd:31*<1 2 1> ~!3",
+  sometimes (stut' 4 0.125 (degrade)) $ s "~ sn" # cut "<3 1>" #  n "29",
+  s "down:0/8" # gain 1.1,
+  s "~ fx:5/6" # gain 1.4,
+  s "~"
+] # orbit 2
+
+
+d7 $ slow "<10 2.5? 7.5> 5?" $  n ("0*20"+irand 20 ) # s "impact" # cut 1 # sus 0.2
+
+d8 $ slow "<10 2.5? 7.5> 5?" $  n ("0*20"+irand 80 ) # s "perc" # cut 1 # sus 0.2 # shape 0.3
+
+d3 $ slow "10 20" $  n (run 80 ) # s "hh" # cut 2 # sus 0.1 # gain 1.1
+
+d3 silence
+
+
+
+d4 silence
+
+d4 $ note (scale "aeolian" $ "0(<3 5>,8,<0 2>)"+"<7 [10 7]> <4 [6 7]> 4 0"+"[0 <2 [1 [3 2]]>]/8") # s "drone/4" # cut 8 # orbit 2  # shape 0.3 # crush 2
+
+d4 $note (scale "aeolian" $ "[0 <2 [1 [3 2]] >]/8") # s "drone/4" # cut 8 # orbit 2  # shape 0.6
+
+d4 $ slow 4 $  note (scale "mixolydian" $ "[<0 -1 -2>,<2 2 2>,<4 5>](<19 22>,32,<0 2 1 0>)") # s "vocal"  # orbit 2 # room 0.3  # sus "<0.12>" # begin 0.1
+
+d6 silence
+
+d6 $ (+note ("[-3 -2 0 0]/8")) $ slow "<1 4> 2?" $ s "bass8" # shape 0.5
+
+d6 $ slow "<4 2 4 8>" $ n ("0*16"|+irand 16) # cut 7 # s "nipon" # orbit 3  # shape 0.6 # gain 1.02 # begin 0.25  # room 0.5 # size 0.94 # sus 0.15 # dilei 0.57 0.5 0.5
+
+d7 $ s "cp(<3 5 7>,8,<0 1 2 0>)" # cut 5  # orbit 3 # speed (slow 8 $ 1 + saw*0.75) # room 0.3 *gain 1.25
+
+d4 $ s "impact:18/16" # cut 10 # gain 1.1
+
+once $ s "impact:22" # cut 10 # gain 1.1 # accelerate 1 # speed 0.7
+
+once $ s "riser:1" # cut 12
+
+
+asap $ n "[2]" # s "alarm" # gain 1.25

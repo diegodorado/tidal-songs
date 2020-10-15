@@ -1,0 +1,347 @@
+--init
+let ns p = note (scale (cS "lydian" "scale") p)
+    setScale s = setS "scale" s
+    kill = (asap $ s"bd" # orbit "[0,1,2,3,4,5,6,7]" # room 0 # gain 0)
+    nsr a = ns (round <$> a )
+    nss a b = nsr (segment a b )
+    shh i   = p i $ silence
+    shhh i  = xfadeIn i 8 $ s "~"
+    shhhh i = xfadeIn i 16 $ s "~"
+
+setcps 0.5
+
+
+--samples
+--0 bd
+--1 sn
+--2 hh
+--3 perc
+--4 cello
+--5 voice
+--6 chant
+--7 drums
+
+--midi
+--0 bass
+--1 strings
+--2 lead
+
+
+
+-- overture
+
+-- hydra, cam only
+
+m1 $ ns "[0,2,4,<6 8 9>]"
+
+d0 $ s "bd*2"
+
+d1 $ s "~ sn*2"
+
+-- hydra, kaleid and scale
+
+m2 $ ns ("0(1,8)" - 7)
+
+m2 $ ns ("0(2,8,<0 1>)" - 7)
+
+--bass
+m0 $ ns "[-7 ~]/2" # sus 1.8
+
+m2 $ ns ("0(<2 4>,8,<0 1 2>)" - 7 |+ ("0"|+irand 6))
+
+m2 $ ns ("0(<2 4>,8,<0 1 2>)" |+ ("-7*2"|+irand 7))
+
+-- hydra: go for those stars
+
+d1 $ n "~ <0*2 4>" # s "sn"
+
+d3 $ s "impact:18/2"
+
+d5 $ ns 0 # s "tuvan:1" # cut 4
+
+d5 $ ns 0 # s "tuvan:1" # cut 4
+  # begin (0.1 + rand*0.5) # att 0.1 # rel 10 # shape 0.3
+
+shh 12
+
+d1 $ n "~ <15*2 4>" # s "sn"
+
+shhhh 5
+
+d3 $ s "perc impact"
+
+d3 $ n ("0*4"|+irand 10) #  s "perc impact" # cut 4
+
+d3 $ n ("<0*8 0*4>"|+irand 10) #  s "perc impact" # cut 4
+
+d0 $ s "bd*<2 [1 4]>"
+  # room 0.2 # size 0.1
+
+d3 $ every 2 (degrade.fast 2)
+  $ n ("<0*8 0*8 0*4>"|+irand 10) #  s "impact" # cut 4
+
+--sw snare
+d1 $ n "~ <3 3(7,8)?>" # s "swsn"
+  # shape 0.3
+
+--hh
+d2 $ s "feel:1*4"
+  # dilei 0.65 0.25 0.06
+  # lpf 6000
+
+
+d3 $ n ("<0*2 0*8 0*4>"|+irand 10) #  s "impact" # cut 4
+
+--four on the floor
+d0 $ s "bd*4"
+  # room 0.2 # size 0.1
+
+--mute all... back to bass and strings
+do
+  hush
+  m0 $ ns "[-7 ~]/2" # sus 1.8
+  m1 $ ns "[0,2,4,<6 8 9>]"
+
+
+d0 $ s "bd*2"
+  # room 0.2 # size 0.1
+
+
+d1 $ n "~ <15*2 4>" # s "sn"
+
+--hydra: affect rotation to snare
+
+--nc
+d2 $ s "feel:1*4"
+  # dilei 0.65 0.25 0.06
+  # lpf 6000
+
+--hydra: affect scale to hh a bit
+
+d4 $ ns ("[0 0*2?]")
+  # s "[cello:0,cello:1]"
+  # sus 0.25
+  # shape 0.4
+  # begin 0.125
+  # dilei 0.5 0.25 0.6
+
+d4 $ struct "t(<5 6 7>,8,<1 2>)" $
+  ns ("[0 0*2?]")
+  # s "[cello:0,cello:1]"
+  # sus 0.25
+  # shape 0.4
+  # begin 0.125
+  # dilei 0.5 0.25 0.6
+
+d4 $ struct "t(<5 6 7>,8,<1 2>)" $
+  ns ("[0 0*2?]")
+  # s "[cello:0,cello:1]"
+  # sus 0.25
+  # shape 0.4
+  # begin 0.125
+  # dilei 0.5 0.25 0.6
+  # coarse ("5 10")
+
+d3 $ s "impact:18/2"  # cut 4
+  # hpf 600 # gain 1.25
+
+m1 $ ns ("[0,2,4,6,<8 9>,<10 11>]"+7+"[0 2]/4")
+  # gain 0.96
+
+d4 $ struct "t(<5 6 7>,8,<1 2>)" $
+  ns ("[0 0*2?]"+"[0 <2 [4 3]>]/4")
+  # s "[cello:0,cello:1]"
+  # sus 0.25
+  # shape 0.4
+  # begin 0.125
+  # dilei 0.5 0.25 0.6
+  # coarse ("5 10")
+
+d4 $ struct "t(<5 6 7>,8,<1 2>)" $
+  ns (sometimes (off 0.25 (+ "7")) $ "[0 0*2?]"+"[0 <2 [4 3]>]/4")
+  # s "[cello:0,cello:1]"
+  # sus 0.25
+  # shape 0.4
+  # begin 0.125
+  # dilei 0.5 0.25 0.6
+  # coarse ("5 10")
+
+d0 $ s "bd*<2 4>"
+  # room 0.2 # size 0.1
+
+d1 $ n "<~ 20> 21(7,8)?" # s "sn"
+
+m0 $ ns ("0(<[11] 14?>,16)"+"-7"+"[0 2]/4") # sus 0.25
+
+m2 $ ns ( struct (shuffle 4 $ "ffftfttf") $ (shuffle 4 $ "[-7 .. 7]")+"[0 1]/4")  # sus (slow 4 $ perlin*1+0.5)
+
+d3 $ n ("<[0*2 0*8?] 0*8 0*4>"|+("0*4"|+irand 10))
+  # s "impact" # cut 4
+  # hpf 600 # gain 1.25
+
+--degrade
+m2 $ ns ( degradeBy 0.6 $ struct (shuffle 4 $ "ffftfttf") $ (shuffle 4 $ "[-7 .. 7]")+"[0 1]/4")  # sus 1
+
+shh 12
+
+
+d4 $ struct "t(<5 6 7>,8,<1 2>)" $
+  ns (sometimes (off 0.25 (+ "7")) $ "[0 0*2?]"+"[0 <2 [4 3]>]/4")
+  # s "[cello:0,cello:1]"
+  # sus 0.25
+  # shape 0.4
+  # begin 0.125
+  # dilei 0.5 0.25 0.6
+  # coarse (slow 8 $ "20..90 80..10")
+
+-- open reverb
+d1 $ n "<~ 20> 21(7,8)?"
+  # s "sn"
+  # room "1 [3 0]" # size 0.8 # gain 0.95
+
+d0 $ s "bd*4"
+  # room 0.2 # size 0.1
+
+m0 $ ns ( "0 ~ [0 7] [<2 3> <0 0*4>]" -7 + "[0 2]/4")
+
+shhhh 4
+
+shhhh 3
+
+shhhh 2
+
+shhhh 1
+
+kill
+
+m0 $ ns ( "0 ~ [0 7] [<2 3> <0 0*4>]" -7 + "[0 1 2 3]/8" )
+
+m1 $ ns ("[0,2,4,6,12,<18 17 19>]"+"[0 1 2 3]/8" )
+
+--filter sweep
+d7 $
+  (# lpf (range 3000 6000 $ slow 4 $ sine)).(# pan (slow 2 $ sine)) $
+  slow 4 $ (shuffle 4) $  striate 32 $
+  s "drums" # shape 0.4 # lpq 0.2 # gain 1.1
+
+--hit on last cycle please
+d0 $ n ("0*<4 4 8 16>") # s "bd" # room 0.2 # size 0.1 # cut 1
+
+--change sn
+d1 $ fast 2 $ n "~ <[0 0*2?] <3 3*2>>"
+  # s "swsn"
+  # size "<5 0 1 0>/2.2"
+  # room 0.3
+  # speed 1.25
+  # shape 0.2
+
+
+d4 $ ns ("[0 1 2 3]/8" ) # s "cello:1" # cut 11 # begin 0.25 # shape 0.53 # gain 1.12
+
+---long
+d6 $ slow 2 $ striate' "[8 16]" 0.4 $ ns ("[-5 -3 -1 <0 2>]/4"+"<0 2>") # s "[chant:1,chant:4]" # shape 0.4  # dilei 0.5 0.25 0.6
+
+shhh 4
+
+m2 $ nsr (struct "[1101001101110111]/2" $ perlin*8+rand*2+4)
+
+m2 $ nsr (struct "<[10110010]1(6,8,<0 1>)>" $ perlin*8+rand*2+7)
+
+m2 $ nsr (struct "<[01101010][1(<5 7>,8,<0 1 2>)][1(<7>,8,<1 2>)]>" $ perlin*8+rand*2+7)
+  * sus 2
+
+
+shh 12
+
+do
+  m0 $ ns (
+    every 3 (off "<0.125 0.25>" (+7)) $
+    -- every 6 (off "<0.125 0.25>" (+7))  $
+    "[-7(<3 1>,8,<0 2>)]"+"[0 1]/8")  # legato 1.8
+  m1 $ ns ( "[0,2,4,6,<8 9 10>,19]/4"+"[0 1]/8")
+
+
+shhh 6
+
+shhh 7
+
+shhh 1
+
+d0 $ s "bd*2"
+  # room 0.2 # size 0.1
+  + dilei "<0 0.5>" 0.25 0.7
+
+do
+  shh 11
+  shh 10
+  d4 $ slow 2 $ stack[
+     ns ("[-5 -3 -1 [0 2*2]]/4"|+2) # s "cello:2" # cut 4,
+     ns ("[-5 -3 -1 [0 2*2]]/4"|+4) # s "cello:2" # cut 5
+    ] # dilei 0.5 0.25 0.6 # gain 1.1
+
+--armonium
+d4 $ slow 2 $ stack[
+   ns ( "[-5 -3 -1 [0 2*2]]/4"+2) # s "cello:2" # cut 14,
+   ns ( "[-5 -3 -1 [0 2*2]]/4" +4) # s "cello:3" # cut 17,
+   note "[-5 -3 -1 [0 2*2]]/4" # s "cello:2" # cut 13,
+   ns ("[2 1 -1 [0 [1 3]]]/4") # s "cello:0" # cut 2 # shape 0.2
+ ] # dilei 0.5 0.25 0.6 # gain 1.1
+
+--hydra: add second layer
+
+d1 $ s "~ sn"
+  # room 0.2 # size 0.1
+  + dilei 0.6 "<0.335 0.25>" 0.4
+
+m0 $ slow 2 $ ns ("[0 ~ ~ 7]"+"[2 1 -1 [0 [1 3]]]/4"-7) # sus 1.8
+
+--ostinato
+d4 $ slow 2 $ stack[
+   ns ( "[0 2]*8"+ "[-5 -3 -1 [0 2*2]]/4"+4) # s "cello:3" # cut 6 # begin 0.4 # end 0.6 #att 0.2 # shape 0.45,
+   ns ( "[0 2]*8"+ "[-5 -3 -1 [0 2*2]]/4"+2) # s "cello:3" # cut 4 # begin 0.3 # shape 0.45 #att 0.2 # rel 0.1,
+   ns "[-5 -3 -1 [0 2*2]]/4" # s "cello:2" # cut 3,
+   ns ("[2 1 -1 [0 [1 3]]]/4") # s "cello:0" # cut 2 # shape 0.2
+ ] # dilei 0.5 0.25 0.6 # gain 1.1
+
+
+d6 $ every 2 (0.5~>) $ slow 2 $ striate' "8 16" 0.421 $ s "chant" # n (choose([1,4])) # shape 0.5 # speed ("<1 1.5>") # gain 1.12 # begin 0.13 # dilei 0.7 1 0.6 # gain 0.9
+
+
+
+--hh
+d2 $ s "feel:1*4"
+  # dilei 0.65 0.25 0.06
+  # lpf 6000
+
+
+d5 $ slow 2 $ ns (off 0.75 (+"2") $ "[2 1 -1 [0 [1 3]]]/4") # s "tuvan:1" # cut 4
+  # begin (0.1 + rand*0.5) # att 0.1 # rel 10 # shape 0.3
+
+d3 $ n ("<0*16? 0*8 0*4>"|+irand 10) #  s "impact" # cut 4
+# hpf 350 # gain 1.25
+-- + dilei 0.8 0.25 0.6
+
+m1 $ ns ( "[0,2,4,6,<8 9 10>,19]/4"+"[0 1]/8")
+
+d4 $ slow 2 $ stack[
+   ns ( "[0 2]*8"+ "[-5 -3 -1 [0 2*2]]/4"+4) # s "cello:3" # cut 6 # begin 0.4 # end 0.6 #att 0.2 # shape 0.45,
+   ns ( "[0 2]*8"+ "[-5 -3 -1 [0 2*2]]/4"+2) # s "cello:3" # cut 4 # begin 0.3 # shape 0.45 #att 0.2 # rel 0.1,
+   ns "[-5 -3 -1 [0 2*2]]/4" # s "cello:2" # cut 3,
+   ns ("[2 1 -1 [0 [1 3]]]/4") # s "cello:0" # cut 2 # shape 0.2
+ ] # dilei 0.5 0.25 0.6 # gain 0.9
+ # room 0.8 # size 4
+
+shhhh 4
+
+
+m2 $ nss "<8 2 16 4>" ("-7*4"+ (slow "<4 0.5>" $ perlin*2 + rand*2)+"[2]/4")
+  # gain 0.94
+
+m2 $ nss "<1 <2 3> 4 <16 12 16>>" ((slow "<4 0.5 8>" $ perlin*11 + rand*2)+"[-7]/4")
+  # gain 1
+
+
+kill
+
+--actually a bass
+d6 $ ns ("{0 -7 ~ [7 0] 0}%8"+"[-3 -2 -1 [0 2]]/8") # s "bass8" # cut 3 # gain 1.0 # sus "[0.2!4 0.1 0.4]/4" # shape 0.54 # coarse "<0 0 30> 0 <25 0> 15" # gain 1.1

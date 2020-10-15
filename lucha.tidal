@@ -1,0 +1,66 @@
+Lucha de gigantes
+convierte el aire en gas natural
+un duelo salvaje advierte
+lo cerca que ando de entrar
+en un mundo descomunal
+siento mi fragilidad.
+
+Vaya pesadilla
+corriendo con una bestia detrás
+dime que es mentira todo
+un sueño tonto y no más
+me da miedo la enormidad
+donde nadie oye mi voz
+
+Deja de engañar, no quieras ocultar
+que has pasado sin tropezar
+monstruo de papel, no se contra quien voy
+es que acaso hay alguien más aquí.
+
+Creo en los fantasmas terribles
+de algún extraño lugar
+y en mis tonterías para
+hacer tu risa estallar
+en un mundo descomunal
+siento tu fragilidad
+
+Deja de engañar, no quieras ocultar
+que has pasado sin tropezar... no ...
+monstruo de papel, no se contra quien voy
+es que acaso hay alguien más aquí.
+
+Deja que pasemos sin miedo...
+
+setcps 0.9
+
+
+
+
+do
+  let b = ( seqPLoop[
+        (0,32,"[3 4 5 1]/8"),
+        (32,40,"[4 0 3 [3 2]]/8"),
+        (40,56,"[3 4 5 1]/8"),
+        (56,64,"[4 0 3 [3 2]]/8"),
+        (64,72,"[5 2 3 2]/8"),
+        (72,76,"1"),
+        (76,84,"[5 2 3 2]/8"),
+        (84,88,"1"),
+        (88,104,"[3 4 5 1]/8"),
+        (104,112,"[4 0 3 [3 2]]/8"),
+        (112,120,"[5 2 3 2]/8"),
+        (120,124,"1"),
+        (124,132,"[5 2 3 2]/8"),
+        (132,136,"1") ] )
+      d pat = scale "ionian" pat
+      m c = sound "midi" # midichan c
+  d1 $ stack[
+    slow 2 $ (every' 4 3 (const $ s "[swbd*3] ~ [swsn:2 ~ swsn:2?] ~") $ s "swbd swsn:3") #orbit 3 # room 0.4,
+    every 4 (rev) $ n "{<2 3> 2*<1 3 1> 4 }%3" # s "feel" # orbit 2 # dilei 0.5 0.166 0.4 # gain 0.86,
+    -- n (d$ (iter 3 $ "{0 <[8 7] 0> <7 [-1 7]> 0 [-1 0]}%3")+b+7) # s "bass8" # shape 0.4 #sustain 0.2,
+    -- note (d$ "{0 <[8 7] 0> <7 [-1 7]> 0 [-1 0]}%3"-7+b) # m "0" # sustain 0.2,
+    -- note (d$ "[0,2,4,<~ 7 ~>]"+b) # m "[2]",
+    -- whenmod 12 6 (# gain 0.8) $  note (d$ (every 4 ((rev).(fast 2)) $ every 3 (+(irand 4)) $  every 2 (palindrome) $ "[0 2 <4 7>]")+b) # m "[7]",
+    -- gain "[0.9 0.7? 0.7]*2" # note (d$ "[0,2,4,<~ 7 ~>]"+b) # m "[3]" # sustain 0.23,
+    -- whenmod 8 4 (# gain 0.85) $  note (d$ "[0 ~ 0 2 3 4 4 4 3 2 1 -1]/2"+7) # m "[5]" # gain 0,
+    s "~"]

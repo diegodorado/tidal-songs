@@ -1,0 +1,39 @@
+--init
+let base = "[0 1 2 3]/8"
+
+m1 $ ns ("[0 -1 -3 -2]/4"-7 )
+
+--
+m1 $ ns ("[0 <~ 14 ~ 7> 0 <~ 7 ~>]*2"|+"[0 -1 -4 -2]/8"|-7 )  |+ gain (1+ rand*0.2) * sus 0.15
+
+
+
+m1 $ ns ((timeLoop 4 $ "{0 [7 0] 0 [~ 0*2] 7}%4")|+"[0 -1 -4 -2]/8"|-7 ) # sus 0.15 # gain 1.1
+
+
+m2 $ ns ( ( timeLoop 2 $ every 2 (0.5 <~)  $ "{0 2 <4 3 6>}%8")|+"[0 -1 -4 -2]/8"+7 ) # gain 1.0
+
+m2 $ ns ( ( timeLoop 2 $ "{14 13 11}%8")|+"[0 -1 -4 -2]/8" ) # gain 1.1
+
+
+m2 $ ns (("[0,2,4,6](<3 3 5 3>,8,<2 1>)"+7)|+"[0 -1 -4 -2]/8" ) # gain 1.1 * sus 0.3
+
+
+m2 $ ns ((degradeBy 0.125 $ scramble 8 $ fast 2 $ arpg $ "[0,2,4,6]")|+"[0 -1 -4 -2]/8" |+ (choose([0, 7, 2, 4])) ) * sus 1.5
+
+m3 $ ns ((scramble 8 $ fast 2 $ arpg $ "[0,2,4,6]")|+"[0 -1 -4 -2]/8" |- 2) + gain 1.5
+
+m3 $ ns (round <$> "0*8"|+(sine*12-rand*3))
+
+
+m3 $ ns (whenmod 16 12 (const $ run "<8 12 8>"+(slow 4 $ run 4)) $ round <$> segment "4 8 ~" (every 4 (const $ fast 6 $ sine*13) $ every 2 (const $ saw*16) $ perlin*12-rand*5)) + sus 0.5 + gain 1.025
+
+
+
+setScale "aeolian"
+
+d0 $ s "<bd*2 bd> ~ sn:4 ~"
+
+d1 $ n "[~ <0*2 2*2>]*2" # s "808oh" + dilei 0.3 0.125 0.5 + cut 1 + lpf 4000 + lpq 0.01
+
+d2 $ n ("0*8"|+ irand 8) # s "perc" # hpf 600 # gain 1.12 |+ cut 3

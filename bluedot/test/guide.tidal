@@ -1,0 +1,414 @@
+once $ sagan "inspire us"
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # sus 0.3
+  d7 $ sides 100 # radius 10 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  d7 $ sides 100 # radius 10 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+  m6 $ ns ("{0 7 ~ 0}%4"+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  d7 $ sides 100 # radius 10 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  d7 $ sides 100 # radius 10 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+
+
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # sus 0.35
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4"  # dilei 0.5 0.25 0.3
+  d7 $ sides 100 # radius 10 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+
+
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0@3 -3 -2@3 -1]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  m6 $ ns (bass+b|-7)  # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d4 $ struct "{10100000110}%4" $ s "nipon" # begin 0.1 # n (irand 8)  # shape 0.4 + dilei 0.75 "0.25 0.5" 0.7 # gain 1.1
+  d7 $ sides 100 # radius 100 # hue 160 # variation 2 # speed (slow 4 $ sine*200)
+
+
+
+do
+  hush
+  let ns pat = note (scale "aeolian" pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  m6 $  mono $ ns (off 0.125 (+"<[7 6] 3 4>") $ (+"2 4?") $bass+b) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd [sn:5!3 sn:4*8?]/4"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d4 $ struct "{10100000110}%4" $ s "nipon" # begin 0.1 # n (irand 8)  # shape 0.4 + dilei 0.75 "0.25 0.5" 0.7 # gain 1.1
+  d6 $ slow 2 $ sides "[4 8 12 24]/4"
+  d7 $ radius 500 # variation 3 # beat 1
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m1 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.5
+  m6 $  mono $ ns (off 0.125 (+"<[7 6] 3 4>") $ (+"2 4?") $bass+b)
+  d0 $slow 2 $  s "bd sn:3"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d6 $ slow 2 $ sides "[4 8 12 24]/4"
+  d7 $ beat 1
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m1 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.5
+  m6 $  mono $ ns (off 0.125 (+"<[7 6] 3 4>") $ (+"2 4?") $bass+b)
+  d0 $slow 2 $  s "bd sn:3"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d6 $ slow 2 $ sides "[4 8 12 24]/4"
+  d7 $ beat 1
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      b= "[0 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m1 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.5
+  m6 $  mono $ ns (off 0.125 (+"<[7 6] 3 4>") $ (+"2 4?") $bass+b)
+  d0 $slow 2 $  s "bd sn:3"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d6 $ slow 2 $ sides "[4 8 12 24]/4"
+  d7 $ beat 1
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3 # gain 0.3
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d4 $ struct "{10100000110}%4" $ s "nipon" # begin 0.1 # n (irand 8) # shape 0.4 + dilei 0.5 0.5 0.3 # gain 1.1
+  d6 $ slow 2 $ sides "[4 8 12 24]/4"
+  d7 $ beat 1
+  m2 $ nsr (slow 2 $ "0*2"|+ rand*6)
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m3 $ ns (bass+b|-0) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3 # gain 0.3
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  d4 $ struct "{10100000110}%4" $ s "nipon" # begin 0.1 # n (irand 8)  # shape 0.4 + dilei 0.5 0.5 0.3 # gain 1.1
+  d6 $ slow 2 $ sides "[4 8 12 24]/4"
+  d7 $ beat 1
+  m2 $ nsr ( mono $ (off 0.25 (+3) $ off 0.11 (+"4 7 14? 7?") $ slow 2$  struct "1011" (slow 8 $ perlin*14 |-14))) # sus 0.2 # gain 1.1
+
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0@2 2 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns $ (b|-7|+"[0,2,4,6]")
+  m3 $ ns ("{0 7 7 7}%4"+b|-7) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  m2 $ nsr ( mono $ (off 0.25 (+3) $ off 0.11 (+"4 7 14? 7?") $ slow 2$  struct "1011" (slow 8 $ perlin*14 |-14))) # sus 0.2 # gain 1.1
+
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0@2 2 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns $ (b|-7|+"[0,2,4,6]")
+  m3 $ ns ("{0 7 7 7}%4"+b|-7) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  m4 $ ns ("[0,2,<4 5>]"+|b|+7) # gain (slow 4 $ 1+perlin*0.3) # sus 0.3
+  m6 $ ns (bass+b|-7) # gain (slow 4 $ 1+perlin*0.3)
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  m2 $ nsr ( off 0.25 (+2) $ slow 2 $  shuffle 4 $ struct "1" (slow 8 $ saw*14)) # sus 0.4 # gain 1.1 # legato 1.3
+  
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0@2 2 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns $ (b|-7|+"[0,2,4,6]")
+  m3 $ ns ("{0 7 7 7}%4"+b|-7) # gain (slow 4 $ 0.8+perlin*0.3) # sus 0.3
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  m2 $ nsr ( off 0.25 (+2) $ slow 2 $  shuffle 4 $ struct "1" (slow 8 $ saw*14)) # sus 0.4 # gain 1.1 # legato 1.3
+  
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns $ (b|-7|+"[0,2,4,6]")
+  m3 $ ns ("[0 ~]/4"+b|-7) # gain 1 # sus 0.3
+  d0 $slow 2 $  s "bd sn:5"
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+  m2 $ nsr ( off 0.25 (+2) $ slow 2 $  shuffle 4 $ struct "1" (slow 8 $ saw*14)) # sus 0.4 # gain 1.1 # legato 1.3
+  
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns ("[0 ~]/4"+b|-7) # gain 1 # sus 0.3
+  d0 $ every 8 (const $ s "bd*8") $ silence
+  d1 $ s "~ oh:4" # dilei 0.5 0.25 0.3
+
+  
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns ("[0 ~]/4"+b|-7) # gain 1 # sus 0.3
+  d0 $ every 8 (const $ s "bd*8") $ silence
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+
+  
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/4"|+b|-7)
+  m3 $ ns ("[0 ~]/4"+b|-7) # gain 1 # sus 0.3
+  m4 $ ns ("[0,2,4,6,8]/8") # sus 0.5
+  d0 $ every 8 (const $ s "bd*8") $ silence
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns ("[0 ~]/4"+b|-7) # sus 0.3
+  m4 $ ns ("{2 5 9 3 14 4 3 4 }%1?") # gain 1.18
+  d0 $ every 8 (const $ s "bd*8") $ silence
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns ("[ ~ [0|7]!3]"+ b|-7)
+  m4 $ ns ("{2 5 9 3 14 4 3 4 }%1?") # gain 1.18
+  d0 $ every 8 (const $ s "bd*8") $ silence
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "{0 0 7 0 [-1 0] 0 [6 7]}%4"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns ("[ ~ [0|7]!3]"+ b|-7)
+  m4 $ ns ("{2 5 9 3 14 4 3 4 }%1?") # gain 1.18
+  d0 $ every 8 (const $ s "bd*8") $ silence
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" "{0 5 6 8 3 ~!6 10}%3") # sus ( slow 4 $ perlin*0.5) # gain 1.1
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (mono $ every 2 (stut' "[2|3]" 0.25 (+7)) $ "[0 ~ ~ [6 7]]"|+b|-7)
+  m4 $ ns ("{2 5 9 3 14 4 3 4 }%1?") # gain 1.18
+  d0 $slow 2 $  s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" "{0 5 6 8 3 ~!6 10}%3") # sus ( slow 4 $ perlin*0.5) # gain 1.1
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (mono $ every 2 (stut' "[2|3]" 0.25 (+7)) $ "[0 ~ ~ [6 7]]"|+b|-7)
+  d0 $ slow 2 $  s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" "{0 5 6 8 3 ~!6 10}%3") # sus ( slow 4 $ perlin*0.5) # gain 1.1
+  d7 $ beat 1
+  d6 $ slow 4 $ sides "4 6 3 100" # hue (rand*300) # speed 1211
+  d5 $feedback (slow 8 "0*128"|+ sine)
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (mono $ "[0 ~ ~ [6 7]]"|+b|-7)
+  d0 $ slow 2 $  s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" "7") # sus ( slow 4 $ perlin*0.5) # gain 1.1
+  d7 $ beat 1
+  d6 $ slow 4 $ sides "4 6 3 100" # hue (rand*300) # speed 1211
+  d5 $feedback (slow 8 "0*128"|+ sine)
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (bass+ b|-7)
+  d0 $ slow 1 $  s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" "[6|7|8]") # sus ( slow 4 $ perlin*0.5) # gain 1.1
+  d7 $ beat 1
+  d6 $ slow 4 $ sides "4 6 3 100" # hue (rand*300) # speed 1211
+  d5 $feedback (slow 8 "0*128"|+ sine)
+
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (bass+ b|-7)
+  d0 $whenmod 16 14 (const $ s "impact*8" # pan (slow 2 saw) # gain 1.15 #shape 0.15 #hpf 300  # n (10+ (slow 2 $ irand 8)) # cut 6 # orbit 3) $ s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" "[6|7|8]") # sus ( slow 4 $ perlin*0.5) # gain 1.1
+  d7 $ beat 1
+  d6 $ slow 4 $ sides "4 6 3 100" # hue (rand*300) # speed 1211
+  d5 $feedback (slow 8 "0*128"|+ sine)
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (bass+ b|-7)
+  d0 $whenmod 16 14 (const $ s "impact*8" # pan (slow 2 saw) # gain 1.15 #shape 0.15 #hpf 300  # n (10+ (slow 2 $ irand 8)) # cut 6 # orbit 3) $ s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" melo) # sus ( slow 4 $ perlin*0.5) # gain 1.1
+  d7 $ beat 1
+  d6 $ slow 4 $ sides "4 6 3 100" # hue (rand*300) # speed 1211
+  d5 $feedback (slow 8 "0*128"|+ sine)
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0 0 2 <-1 3>]/8"
+      bass = "[ ~ [0|7]!3]*2"
+      melo = "{0 5 6 8 3 ~!6 10}%3"
+  m1 $ ns ("[0,2,4,6,<10 9 8>]/2"|+b|-7)
+  m3 $ ns (bass+ b|-7)
+  d0 $whenmod 16 14 (const $ s "impact*8" # pan (slow 2 saw) # gain 1.15 #shape 0.15 #hpf 300  # n (10+ (slow 2 $ irand 8)) # cut 6 # orbit 3) $ s "bd sn:4"
+  d1 $ s "~ [hh|hh:4] oh:3 hh*2" # dilei 0.5 0.25 0.3
+  m2 $ nsr (mono $ slow 2  $ struct "1(<9 13>,16,<0 1 2>)" melo) # sus ( slow 4 $ perlin*0.5) # gain 1.1
+    # hue (rand*300)
+    # beat 1
+  d7 $ beat 1
+  d6 $ slow 4 $ sides "4 6 3 8"
+  m6 $ ns ( ("<0 0.25 0.5>" ~>) $ "[<6 7> [4 3] ] ~"+7) # gain (slow 4 $ 0.85+perlin*0.3) # sus (slow 5.3 $ 0.1+perlin*0.3)
+
+
+
+

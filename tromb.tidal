@@ -1,0 +1,36 @@
+
+d1 $ stack[
+  begin "[0.28(5,8,<1 2>)]" # end 0.33  # note "[0 [2 4]]/4" # cut "1" # n 1 * gain 1.02,
+  begin ("[0(3,8,<0 2>)]" |+ (slow 8 $ range 0.1 0.6 $ sine)) # sus 0.1  # note "[4 [6 7]]/4" # cut (irand 1) # n "[0 1]/8" # dilei 0.5 0.25 0.7 # orbit 2,
+  begin "[0.2(<3 5>,8,<0 2 0>)]" # sus 0.1 # note ("[7 [9 11]]/4"-0) # cut (irand 1) # n "[1 0]/4" # dilei 0.5 0.25 0.7 # orbit 2,
+  stack[
+    (0.25 ~>)  $ note ("[12*8 14*16?]/4") # cut 9 # pan 0 ,
+    note ("[7*16? 9*16?]/4") # cut 8 # pan 1
+  ] # begin 0.25 # sus 0.06 #   n "[1]/4" # dilei 0.9 0.25 0.5 # orbit 5 # gain 1,
+  -- note "[-5 [-6 -3 -5]]/4" # cut "3" # accelerate 1.2,
+  begin "[0.2(3,8,<0 2>)]/2" # sus 0.4 # note "[0 2]/4" # cut "5" # n "<0 0>",
+  begin "[0.55(5,8,<0>)]" # sus 0.1 # note "[4 [6 7]]" # cut "4" # coarse 20,
+  begin "~"
+  ] # s "<tromb>" # shape 0.7 *gain 1
+
+mute 1
+
+d2 $ stack[
+  s "swbd*2" # room 0.2 # shape 0.5 *gain 1.1,
+  s "[ ~ [sn:3*2 ~] ~  feel:3*<1 4?>]/2" * gain 1.1, 
+  s "808oh*8" # lpf (range 600 16000 $ slow 2 $ sine*0.8+0.2),
+  s "~"
+] * gain 1.1
+
+d3 $ note (sometimes (+"[0,<12 31>]") $ "0(<3 3 3 5>,8,<0 2>)"+"[0 2]/4"-12) # s "bass8" # shape 0.45 # sus 0.2
+
+d4 $ note (scale "ionian" $ (degrade $ fast (choose([0.25,0.5,1,2,4]))$ "[0*2]")|+(range (-2) 2 $ round <$> perlin)+(slow 4 $ irand 4 - 4)) # s "tuvan" # n (choose([1,4,6])) # cut 12 # shape 0.65 # gain 1.1 # orbit 5 # dilei 0.6 (choose([0.5,0.25])) 0.6
+
+
+solo 1
+
+d5 $ note (scale "lydian" $ "[0(<3 5>,8) 4(3,8,2)]"+(irand 10))  # sound "midi" # midichan 5 # gain 1.2
+
+d6 $ note (scale "lydian" $ "[0(<3 5>,8),2(3,8,2),4(1,8,1)]"+(irand 12))  # sound "midi" # midichan 2 # gain 1.3
+
+d7 $ note (scale "lydian" $ "[0(<3>,8) ~]"+(irand 1)-7)  # sound "midi" # midichan 0 # gain 1

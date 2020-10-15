@@ -1,0 +1,14 @@
+-- I follow the river
+do
+  let d p = scale "ionian" p
+  let rythm = "[0(<2 3>,8)]*2"
+  let bass = "[3 4 5 2]/4"
+  d1 $ stack[
+    whenmod 16 8 (# gain 0)
+      $ slow 4 $ (|-|note 2.4)
+      $ note "[9 9] [5 7 ~] [~ 5][5 4 2] [4 4][0 2 ~][~ 4][4 2 0]"
+      # s "moan" # cut 4 # begin 0.17 # hpf 400 # gain 1.12 ,
+    (d $ rythm+bass+"[0,2,4,7]*2"+"[0,-7]")  # s "superpiano" # gain 0.9 # sus 0.4,
+    note (d $ rythm+bass)  # s "bass:0" -note 7 # cut "-1",
+    s "[bd*2,hh*8?, ~ <sn:3 cp>]*2"
+   ]

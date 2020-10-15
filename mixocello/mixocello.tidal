@@ -1,0 +1,76 @@
+let pp = "[0 1 -2 [-1 4]]/8"
+
+setcps 0.8
+
+once $ s "[cello:1,cello:0,cello:2 ]" # shape 0.2 # gain 1.2 # dilei 0.6 0.5 0.645 # orbit 0 # accelerate 3 # speed 0.85
+
+--swbd
+d1 $ s "swbd(<3 5>,8,<0 2>)" # orbit 1 # room 0.3 #gain (1.1+rand*0.2)  # size 0.57 # speed "[1 <4 8>]" # orbit 1
+
+d1 $ s "sn:3*8?" # orbit 1 # room 0.25
+
+--gabba
+d2 $ fast "[1 2]/2" $ s "gabba(<6>,8,<0 1 2>)" # orbit 1 # gain 1.1 # orbit 2 # speed (slow 2 $ 1+saw*4)
+
+d2 $ fast "[1]/2" $ s "gabba(<6>,8,<0 1 2>)" # orbit 1 # gain 1.1 # orbit 2 # speed (slow 4 $ 1+saw*4)
+
+d2 $ s "gabba(<5>,8,<2>)" # orbit 1 # gain 1.21 # orbit 2
+
+d2 $ off "0.25 0.125" (#speed 8) $ s "gabba(3,8,<0 1>)" # n (every 4 (fast 2 ) $ "0 1 0 1") # gain 1.1 # orbit 2
+
+d2 $ off "0.25 0.5" (#speed 8) $ s "gabba(<3 5>,8,<0 1>)" # n (every 4 (fast 2 ) $ "0 1 0 2") # gain 1.1  # orbit 2
+
+--hihat
+d3  $ s " 808oh(5,8,<7 10>)" # n (irand 3 ) # cut 22 # orbit 3
+
+d3  $ s "[808oh(13,16,<0 7 10>)]/2" # n (irand 5 ) # cut 22 # end 0.2 # orbit 3
+
+--drums
+d4 $ fast "<1>" $ degradeBy 0.004 $   (# hpf (slow 8 $ 40+sine*2000+rand*0)) $ slow 4 $ (shuffle 32) $ striate 32 $ s "drums" # shape 0.32 # gain 1.1  # hpq 0.35 # orbit 4
+
+
+
+--bass
+d5 $ every 2 (within (0.5,1) ((+shape 0.2).(# coarse 4)) ) $ note (scale "mixolydian" $ every 4 (off 0.125 (+7) )$ "[0 <~ ~ [7 0] ~> ~ <~ [<[~ 4] [6 7]>]>]"+pp) # s "bass8" # shape 0.45 # gain 1.1 # orbit 5
+
+d5 $ note (scale "mixolydian" $ (timeLoop 2 $ "{0 ~ [6 7] [<10 11 12 [6 7]> 0] ~}%4" )+pp) # s "bass8" # shape 0.45 # gain 1.15 # orbit 5
+
+d5 $ note (scale "mixolydian" $ (0.25 <~) $ "[0!2 ~!6]" +pp) # s "bass8" # shape 0.45 # gain 1.15 # orbit 5
+
+d5 $ note (scale "mixolydian" $ (0.25 <~) $ "[<0 6> 7 ~!6]"-2) # s "bass8" # shape 0.45 # gain 1.15 # orbit 5
+
+
+--guitar
+d6 $  (+note (scale "mixolydian"  $ (round <$> (within(0.5,1) degrade $ "0*8"+(slow 4 $ sine*10)))+pp ))
+$  s "<gtr6:1>" # shape 0.6  # dilei 0.5 0.5 0.35 # orbit 6 # gain 1.02 # end 0.4 # cut 22 # hpf 200
+
+
+d6 $  note (scale "mixolydian" $ "[0]"+|(fast 2 $ every 4 (iter 4) $ "[<3*2 6*4 7*8>]/2")+(irand 8)) # s "gtr6:6" # shape 0.47 # dilei 0.5 0.5 0.65 # orbit 6  # cut 1 # crush "16 <4 3>" # gain 1.15
+
+d6 $ off 0.5 ((# s "gtr6:4").(# cut "2").(#gain 0.99)) $  note (scale "mixolydian" $ "[0]"+|(fast 2 $ every 4 (iter 4) $ "[<3*2 6*4 7*8>]/2")+(irand 8)) # s "gtr6:6" # shape 0.47 # dilei 0.5 0.5 0.65 # orbit 6  # cut 1 # crush "16 <4 3>" # gain 1.15
+
+d6 silence
+
+--fill
+once $ s "[cello:1,cello:0,cello:2 ]" # shape 0.2 # gain 1.02 # dilei 0.6 0.5 0.645 # orbit 0 # accelerate (3) # speed 0.85
+
+d7 silence
+
+--tuvan
+d7 $ degrade $  note (scale "mixolydian" $ (stut' "[1 2]/5.1" "[0.125 0.25]/2.4" (+(1+irand 4)) $ "[<2 6>(5,8,<0 2>)]")+pp) # cut 8 # begin (slow 3 $ 0.1+sine*0.5) # gain 1.1 # shape 0.25 # s "tuvan:1" # orbit 7
+
+--rave
+d7 $ fast "<1>" $ every 4 (iter 4 ) $  every 2 ("<0.25 0.125>" ~>) $ s "[rave:2*<1 2 1 1> ~] <fm:11 <fm:10 ~ ~ ~>>" # cut 12 # gain 1.1 # shape 0.35 # orbit 7
+
+d7 silence
+
+--cello
+d7 $ slow 1 $ stack [
+  note (scale "mixolydian" $ (sometimes (fast "<2 4>") $ "[0 2 4 6]/4")+pp-2) # cut 8 # begin 0.025 # n "1",
+  note (scale "mixolydian" $ swing 0.15 $ off "<0.5 0.25>" (+2) $ (irand 4)+"[-2]"+pp) # cut 9 # begin 0.015 # n "<3 2>",
+  note "~"
+]  # gain 1.21 # shape 0.5 # s "cello" # orbit 7
+
+
+--moog
+d7 $ superimpose ((# s "moog").(# cut 23).(# gain 1.1).(+ note 12)) $ note (scale "mixolydian" $ (sometimes (fast "<2 4>") $ "[0 2 4 6]/4")+pp-4) # cut 8 # begin 0.025 # n "0 1" # gain 1.21 # shape 0.5 # s "cello" # orbit 7

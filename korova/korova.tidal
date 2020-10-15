@@ -1,0 +1,11 @@
+import qualified Sound.Tidal.Scales as Scales
+
+cps (-1)
+
+cps (1)
+
+d1 $ seqP [
+  (0, 12, sound "bd bd*2"),
+  (4, 12, sound "hh*2 [sn cp] cp future*4"),
+  (8, 12, sound (samples "arpy*8" (run 16)))
+]

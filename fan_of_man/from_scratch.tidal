@@ -1,0 +1,12 @@
+d1 $ slow 4 $ scramble "4" $   striate 32 $ s "drums"
+
+although, this does
+
+d1 $ stack[
+  s "swbd(<4 3>,6) <swsn swsn:3*6?>" # gain 1.1 # orbit 3,
+  within (0.75,1) (sometimes (fast 2) ) $  n (run 12) # s "tabla2",
+  note (scale "spanish" $ round <$> (segment (choose([1,3,6,12])) $ sine*12+rand*3)) # s "midi" + stack[midichan 5,-note 12],
+  -- note (scale "spanish" $ round <$> (segment (choose([1,3,6,12])) $ range 0 "<8 12>" $ sine)+"[0 3 4]/12") # s "midi" + stack[-note 12],
+  -- s "pacino:1" # orbit 3 # cut 3 # shape 0.3,
+  -- note (scale "spanish" $ round <$> (segment "4 <3 6>" $ range 0 10 $ tri)+"[0 3 4]/12"+"[0,7]")) # s "midi" + stack[midichan 2],
+  jux (rev) $ s "feel:1(7,12)" # n (1+irand 3) # gain 1.152 ] # cps 0.54

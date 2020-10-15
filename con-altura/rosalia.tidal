@@ -1,0 +1,40 @@
+setcps 0.7825
+
+
+d3 silence
+
+let base =  "[2 3 0 0]/8"
+
+let base = "[0 0 2 1]/8"
+
+--vocals
+d1 $ loopAt 8 $ scramble 8 $ striate 32 $  s "rosalia" # shape 0.4  # n (fast 4 $ choose([0,2]))  # dilei 0.2 1 0.25 # orbit 2 # cut 4  + gain 1.12 # speed 0.75
+
+
+-- drums
+d2 $ stack[
+  fast 2 $ every 2 (stut' (irand 8) "<0.25 0.125>" (*speed 1.2)) $  s "~ sn:18",
+  s "[[bd sn@4](<3 <5 7?>>,8,<0 <0 2>>)]" # n (slow 4 $ irand 80),
+  s "[bd(3,8)]" # n 31 # orbit 3,
+  n ("0(<5 7>,8,<0 1>)"+irand 80 ) # s "impact" # cut 2 # sus 0.1 # gain 1.1,
+  s "[down/2]" ,
+  s "cp:10(<3 5 7>,8,<0 1 2 0>)" # cut 5  # orbit 1 # speed (slow 8 $ 1 + saw*0.75) # room 0.13,
+  s "impact:18/16" # cut 10 # gain 1.1,
+  s "~"]
+
+--organ
+d3 $ shuffle 1 $ struct "1(<5 7?>,8)" $ note ( scale "dorian" $  "[0,2,4]"+base-7 ) # midi 1  + note 2 # gain 0.85
+
+--bass
+d3 $ note ( scale "dorian" $  "[0 7]*4"+base ) # midi 1  + note 2 # gain 1.25
+
+
+--lead
+d6 $ note ( scale "dorian" $  "[0 2 4 6 4 6 8 10]"+"[0]"+base ) # midi 3  + note 2
+
+d4 $ fast 1 $ shuffle 8 $ struct "1(<5 7 <3 5>>,8,<0 1>)" $  note ( scale "dorian" $  "[-7 .. 14]/4" ) # midi 1  + note 2 # gain 1.2
+
+--drone
+d5 $ note ( scale "dorian" $ base ) #  s "drone" # cut 3 # orbit 1 # begin 0.5
+
+d5 $ note ( scale "dorian" $ rarely (off 0.125 (+"<2 4> <7 [-1 1]>")) $  (sometimes (slow 2) $ "[0*<2 4> <~ [~ [<6 8> 7]]>]")+base ) #  s "drone" # cut 3 # orbit 1  # sus 0.25 # begin 0.5

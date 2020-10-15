@@ -1,0 +1,116 @@
+
+d1 $stack[
+  -- s "{🐬 🍬 ~ 👇👇🤞🤞🖖🖖}%4",
+  --
+  s "👍 🖤 ~ 🖍",     
+  --
+  -- s "{👆👈🖐️/2👍🤟*2}%4",
+  --
+  -- s "{👆👈🍏🖐️}%2",
+  --
+  s "{🍇 🚀 🍇 🤙 🍇 🚀 🍇 💩}%2"
+ ]
+
+d2 $ s "💚*<1 2 1 1>🙏" # z_order 2
+
+d3 $ note (scale "minor" $ (slow 2 $ "{0 0 2 0 4 7 ~ [5 6] [14 7] }%8")-7+"[0 -1 -2 -1]/16") # sus 0.0512 # shape 0.4 # begin 0.5 # s "tuvan:1/8" # coarse (every 2 (const 0) $ "<10 6 100> 40") # cut 1 # dilei 0.75 "<0.25 0.125 0.5>" 0.6 # orbit 2
+
+
+
+d3 $ slow 4 $ striate' "16 32" 0.2 $  s "[chant:2]/2" # shape 0.3 # dilei 0.75 "<0.25 0.125 0.5>" 0.6 # orbit 2
+
+d4 $ note (scale "minor" $ "{0 [4 7] 7 ~ <~ [6 7]> 0}%4"-7+"[0 -1 -2 -1]/16") # sus 0.25 # midi 0
+
+d3 silence
+
+d4 $ note (scale "minor" $ "{0 ~ [6 7] 0 ~ }%4"-7+"[0 -1 -2 -1]/16") # sus 0.25 # midi 0
+
+d7 silence
+
+d5 $ note (scale "minor" $ "[0 .. 7]"+(irand 8)+"[0 -1 -2 -1]/16") # sus 0.125 # midi "[5 ~]/4"
+
+
+d6 $ note (scale "minor" $ ("0*4"+irand 8)+"[0 -1 -2 -1]/16"+"[~ 7 0 ~]/4") # midi "[5 6]/4"
+
+d6 silence
+
+d6 $ note (scale "minor" $ (round <$> ( segment "4 8" $ "0*4"+perlin*8))+"[0 -1 -2 -1]/16"+"[~ 0]/4") # midi "[6]/4"
+
+
+d7 $ slow 4 $ shuffle 8 $ chop 32 $ s "drums" # gain 1.13 # shape 0.3 # speed 0.9  # orbit 2
+
+
+
+
+
+
+
+
+
+
+
+do
+  let b ="[0 2 [0 4] [0 7]]/8"
+      d = scale "dorian"
+  d1 $ stack[
+    s "💙 " # gain 0.95 # orbit 3 # room 0.2,
+    slow 4 $ striate' "16 32 24" 0.1 $ s "<🐳🔥>" # gain 0.85,
+    (#coarse ((irand 8)*3)) $ s "{🚂🚃🚄🚅🚆🚇🚈}%4" # gain 0.9 ,
+    note (d $ off 0.25 (+"[0]")$ "0(3,8,<0 1 2>)"+"[0,2,4,<6 7 8>]"+b) # s "<rhodes supersquare>" # gain "<0.72 0.65>" # accelerate (range 0 0.02 $ slow 8 $ sine) # lpf 3000 # lpq 0.1,
+    n (d $ "{0 0 [7 10]}%4"+b) # s "bass8" # shape 0.3 # sustain (range 0.1 0.35 $ slow 8 $ tri) # gain 0.95,
+    note (d $ stut' 5 "<0.33>" (+"[0 1 2]") $ "0*4"+"[0 2 0 0]/4"+7 ) # midi "[4]" # gain 0.75 # sustain 0.22,
+    whenmod 16 8 (const $ s "~") $ note (d $ "0*4"+(irand 8)+"[0 2 0 0]/4"+7 ) # midi "[5]" # gain 0.7,
+    note (d $ (fast "<1 2 0.5>" $ "<0*4 7*4>")+(irand 8)+"<0 ~ ~ ~>"+b ) # midi "<5>" # gain 0.8,
+    note (d $ "[2,4,<6 [7 8 7] 8 [10 11]>]"+b ) # midi "<2,3>" # gain 0.7,
+    s "~"]
+
+
+cps 100
+
+
+do
+  let bp = "[-2 -2 -1 [0 7]]/16"
+  d1 $ stack [
+    whenmod 16 14 (const $ s "✊*12" #speed (range 2 1 $slow 2 $ saw)) $ s "[💜<✊[👊*2 ~]>]" # orbit 3 # room 0.2,
+    note (d $ every 3 (off 0.25 (+"[0,7]")) ( (sometimes (fast "<2 4>" ) $ (irand 4)+"[0 2 4 6]")+bp)) # s "<supersquare ~>" # gain 0.8 # orbit 2 #dilei 0.5 0.125 0.6,
+    s "{💜}%2",   --  by Nicolas Croce ( LIBRE!!! )
+    -- note (d $ "[0,4,6,8](3,8,<0 1 2 0>)"+"[0,7]"+bp) # midi "[2,3]" #gain 0.9,
+    note (d $ stut' 3 0.25 (+"[0 2 4]") $ "7"+bp) # midi 4 # gain 0.9,
+    s "feel:2(5,8,<10 1 0 0 2>)" # gain 1.2 #lpq 0.15 # lpf (range 3000 300 $ slow 4.4 $ tri) ,
+    note (d $ "{0 7 ~ ~}%4"-7+bp) # midi "[0,1]" # gain 0.6,
+    s "~"]
+
+
+
+
+do
+  let p1 = "[-2 -1 0 0]/16"
+      d = scale "dorian"
+  d1 $ stack[
+    slow 2 $ shuffle 4 $ chop 16 $ s "drums" # gain 1.13,
+    s "{feel:1 feel:2 ~}%8" # speed "{1 0.75 0.8}%3" # orbit 2 # dilei 0.5 0.125 0.6 # gain 0.85,
+    n (d $ "{0 0 <<0 [7 10]> [0 7]> 0 7}%4"+p1) # s "bass8" # sustain 0.2 # gain 1 # shape 0.25,
+    note (d $ "0(<3 3 5>,8,<0>)"+"[0,2,4,6]"+p1+7) # s "midi" # gain 1.1 # midichan "[3]" # sustain 0.1,
+    (# speed "[1,<1 1.5 0.5>]") $ slow 4 $ striate' "<32 16 24>" "0.1 0.2" $ s "{😱❤}%1" # gain 1.2 # shape 0.3,
+    s "~"]
+
+
+
+
+
+
+
+do
+  let b ="[0 1 2 [3 4 -1 4]]/8"
+      d = scale "lydian"
+  d1 $ stack[
+    spread ($) [fast 1, brak, rev, slow 2] $ s "bd hh sn:3 feel:1 " ,
+    s "~ 💪" # gain 1 # orbit 3,
+    jux (#speed ("0.48*8"+(slow 4 $ sine*0.4)))$ n "{0 .. 0}%8" # s "[dr]",
+    foldEvery [2,3] ((|+| crush 8 ).(|*|lpf 0.7 )) $ note (d $ every 3 (+"[0]") $ sometimes (stut' 3 0.125 (+"[4 8]")) $ "[0 1 3 4](<3 5>,8,<1 2>)"+"[0]"+b) # s "superpiano" # gain 0.85 # dilei 0.5 0.5 0.5 # orbit 2 #lpf 4000 # lpq 0.1,
+    n (d $ "{0 0 5 0 ~ 0 5}%4"+b) # s "bass8" # shape 0.3 # sustain 0.23 # gain 0.95,
+    note (d $ stut' 3 "<0.125 0.25 >" (+"[0]") $ "[0 2 0 0]/2" ) # midi "[4]" # sustain 0.0122,
+    note (d $ (foldEvery [3,4] (const $ "<0 7>(<5 7 7>,8,<1 2 0>)"+((irand 8)*"<0 1>")) $"0(3,8,<0 1>)")+b-7 ) # midi "[0]" # gain 1.2 # sustain 0.07,
+    note (d $ (fast "<4 2 3>" $ "<0*4 7*4>")+(irand 8)+"<0 ~ ~ ~>"+b ) # midi "<4>" # gain 0.8,
+    note (d $ every 4 (const $ "5")$ "[[~ 0 0 0 0 [~ 1] ~ 2] ~]/4"+"[0,2,4]" ) # midi "<2,3>" # gain 0.7 # sustain 0.5,
+    s "~"]

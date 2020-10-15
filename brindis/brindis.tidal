@@ -1,0 +1,47 @@
+setcps 1
+
+
+let pats =
+      [
+        ("bs", s "[swbd swsn]/2" # gain 1.2 # orbit 3),
+        ("bs2", s "[swbd [swsn!3 [swsn swsn*3]]/4]/2" # gain 1.2 # orbit 3),
+        ("bs3", s "[swbd*4, ~ <swsn <swsn:3*3? swsn:4>>]/2" # gain 1.2 # orbit 3),
+        ("bs4", s "[swbd <swsn <[swsn:3 swsn:3? swsn:3?] swsn:4>>]" # gain 1.2 # orbit 3),
+        ("hh", off "<0.167 0.33>" (|*|gain 0.9) $  s "<hh*2 feel:1*<2 2 3>>" # gain 1.1 # hpf (range 1000 6000 $ slow 4 tri) # hpq (range 0.025 0.3 $ slow 4.3 tri) # lpf 3000),
+        ("bass", n (sometimesBy 0.2 (off 0.05 (+12)) $ "[0(<5!3 10>,12) ]/2" + "<0!3 [2 [2 9]]>/8"+ "[7 5]/32") # s "bass8" # shape 0.5 # gain 1.05),
+        ("pad", n ("[0,4,<7 6>,<11 9>]/4" |+ "[7 5]/32" |-12 ) # midi 0),
+        ("sweep0", stack[cc 3 74 0.33,cc 3 71 0.4]),
+        ("sweep", stack[cc 3 74 (range 0.2 0.35 $ slow 4.4 $ tri),
+        cc 3 71 (range 0.35 0.55 $ slow 5.6 $ (1-tri))]),
+        ("sweep2", stack[cc 3 74 (range 0.15 0.5 $ slow 4.4 $ tri),
+        cc 3 71 (range 0.3 0.65 $ slow 5.6 $ (1-tri))]),
+        ("arp", n ("[ {0 4 7 11}%24 {11 7 4 0}%24 {0 4 6 9}%24 {9 6 4 0}%24]/8"+ "{-12 0 12 12 0 -12}%3"  + "[7 5]/32") # midi 1 # gain 1.05),
+        ("arp2", n ("[0 4 7 11]*4"+ "[-24 -12 0 12]"  + "[7 5]/32") # midi 4 # gain 1.05),
+        ("keys", n ("[12 ~ -5 0 4 7 ]"+ "{0}%3"  + "[7 5]/32") # midi 2 # gain 1.0 ),
+        ("keys2", n ("[12 ~ -5 0 4 7 ]"+ "{0 12 0 -12 }%3"  + "[7 5]/32") # midi 2 # gain 1.0 ),
+        ("lead", n (toScale [0,4,7,9,11, 12] $ (round <$> (segment "<<3 ~ 1> <6 1>>" $ slow 3 $ sine*1+perlin*12+rand*2)) + "[7 5]/32"-12) # midi 4),
+        ("speech",s "[~ pappo:2@2 ~ pappo:3@2]/32" # cut 1 # shape 0.75 # coarse 2 # hpf 1000 # gain 1.35 # speed 0.95)
+      ]
+    fx = [
+      ("str", (# midi 3)),
+      ("str2", (|+| n "[0,12]").(# midi 3)),
+      ("chorus", (# speed (stack[1,slow 5.6 $ range 0.7 1.2 $ sine])).(|*| gain 0.94)),
+      ("coarse", (# (coarse (irand 30) # orbit 2 #dilei 0.6 "<0.33 0.66>" 0.7 )))
+      ]
+in
+d1 $ ur 32 (cat [
+  "[bs, pad, [~ hh]]",
+  "[bs, pad, hh, speech]",
+  "[bs, pad, hh, [keys keys2]]",
+  "[bs, sweep0, speech, pad, pad:str, hh, keys2]" ,
+  "[bs, sweep, pad:str, hh, bass]",
+  "[[bs bs2], [speech pad], hh, bass]" ,
+  "[bs2:chorus, pad, hh, bass, arp]",
+  "[bs2:chorus, pad:str2, sweep, hh, bass, arp]",
+  "[[bs2:chorus@3 bs3:chorus], pad:str, sweep0, hh, bass, lead]",
+  "[[bs2:chorus@3 bs3:chorus], pad:str2, sweep2, hh, bass, [lead arp]]",
+  "[bs4:chorus, pad:str2, sweep2, hh, bass:coarse, [arp@3 arp2]]",
+  "[[bs4:chorus@3 bs], pad:str2, sweep, hh, bass:coarse]",
+  "[[bs ~], pad, [hh], speech]",
+  "~"
+  ]) pats fx

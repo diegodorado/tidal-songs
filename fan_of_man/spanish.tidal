@@ -1,0 +1,73 @@
+do
+  let pat = "[0 3 4]/12"
+  d1 $ stack[
+    s "[swbd swbd*3?]" #orbit 3 # room 0.2 # gain 1.1,
+    --s "[swbd(<3 4>,6,<0 0 2>) <swsn swsn:3*6?>]" #orbit 3 # room 0.2 # gain 1.1,
+    struct "t(7,12,<0 1 2>)" $ s "feel" # n ("0*4"+(choose([1,2,3,4]))),
+    degrade $ within (0.75,1) (sometimes (fast 2)) $ n (run 12) # s "tabla2" # vowel "<a e o>" # gain 1.15,
+    --sometimes (#speed "0.5") $ slow "<2 4 8>" $ striate' "24 48" 0.2 $ s "chant" # n "[0]" # shape 0.3 # gain 1.2 # orbit 2 # delay 0.3 # delayt 0.66 # delayfb 0.6,
+    -- s "pacino:2" # shape 0.45 # cut 1 #orbit 3,
+    -- off 0 ((# midichan 0).(|-| note "12")) $ note (scale "spanish" $ round <$> (segment (2 * irand 4) $ range 0 "<12 8>" $ sine+0.2*rand)) # s "midi" # midichan 5 ,
+    note (scale "spanish" $ round <$> (segment (choose([1,3,6,12])) $ range 0 "<12 8>" $ sine)-7+pat) # s "midi" # midichan 0 ,
+    note (scale "spanish" $ off 0.3 (+"[0,7]") $ round <$> (segment "4 <3 6>" $ range 0 10 $ tri)+pat) # s "midi" # midichan 2 ,
+    s "~"]
+
+
+
+
+
+
+
+
+
+
+
+do
+  let pat = "[0 <1 4> 2 [3 4]]/16"
+      spat= "[hirajoshi]/4"
+  d1 $ stack[
+    every 4 (iter 4) $ s "[<swbd [swbd*2 ~]> swsn:1 ]" #orbit 3 # room 0.2 # gain 1.1,
+    jux (rev) $ s "<feel:2 feel:1>(5,8,<0 1 2>)" # gain 1.1,
+    note (scale spat $ "{0 [7 4] [0 ~] 7 0}%4"+pat-7) # s "midi" # midichan "[0]",
+    note (scale spat $ "[0,3,5](3,8,<10 12>)"+pat+5) # s "midi" # midichan 6,
+    note (scale spat $ round <$> (segment "<<4 8> 6>" $ range 0 5 $ (slow 4.5 $ sine)+"<0.125 0>"*rand)+pat) # s "midi" # midichan "<5 4>" # sustain "<0.1 0.25>",
+    -- slow 4 $ within (0.75,1) degrade $ striate' "32 16" "0.15 0.3" $ n "[0,4,7]" # s "chant" # shape 0.5 # gain 1.25,
+    -- note (scale spat $ round <$> (segment "<8 8 8 12>" $ range 4 "14" $ stack[sine+"<0.5 0>"*rand,slow 2.3 $ sine,slow 2 $ slow 3.7 $ sine])-7+pat) # s "midi" # midichan "[2,7]",
+    note (scale spat $ round <$> (within (0.5,1) degrade $ segment (choose([4,8,2])) $ range 0 8 $ (slow 4 $ superimpose (rev) $ sine)+rand*0.3)+pat) # s "midi" # midichan "<8 5>" # sus (0.01+0.2*(slow 5 sine)),
+    stut' 3 0.25 ((|+| n "[0 12 24]").(|*| gain 0.85)) $  note (scale spat $ "[0 2 4 6]*2"+(irand 4)+pat) # s "midi" # midichan "[4]" # gain 1.2 # sus (0.05+0.1*(slow 4 sine)),
+    s "~"]
+
+hirajoshi
+minPent
+majPent
+ritusen
+ egyptian hirajoshi iwato chinese indian pelog prometheus scriabin gong shang jiao zhi yu whole augmented augmented2 hexMajor7 hexDorian hexPhrygian hexSus hexMajor6 hexAeolian major ionian dorian phrygian lydian mixolydian aeolian minor locrian harmonicMinor harmonicMajor melodicMinor melodicMinorDesc melodicMajor bartok hindu todi purvi marva bhairav ahirbhairav superLocrian romanianMinor hungarianMinor neapolitanMinor enigmatic spanish leadingWhole lydianMinor neapolitanMajor locrianMajor diminished diminished2 chromatic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+d1 $ fast 2  $ stack[
+  s "[[swbd ] <swsn swsn:1> ]" # orbit 3 # gain 1.12 # room 0.23,
+  -- n (run 12 ) # s "tabla2" # gain 1.1,
+  s "{feel:2 ~ feel:1*<1 2 1 16> }%6",
+  every 3 (rev) $ off 0.5 (mono.(# midichan "5").(|+| note "<12 0>") ) $ note ("[0*6]"+(cP "[0,3]" "notes")) # s "midi" # midichan "[7]" ,
+  note (mono $ "<{0 -12 ~ 0}%6 {0 -12 7}%6>"+(cP "[0]" "notes")) # s "midi" # midichan "0" ,
+  jux (rev) $ slow 4 $ striate' "24 48" 0.2 $ s "chant" # n (cP "[0]" "notes") # shape 0.6  # orbit 1 # delay 0.5 # delayt 0.33 # delayfb 0.4,
+  (every 4 (fast 1.5)) $ s "{feel:2 ~ feel:1 }%12",
+  -- note (scale "spanish" (slow (choose [1,3,6]) $ ( "0*12")+(run 8)-7)) # s "midi" # midichan "0" # sus "0.2",
+  every 2 (iter 4 ) $ note (scale "ritusen" ("0(<11 8>,12)"+(slow 4 $ run 4)+(irand 10))) # s "midi" # midichan "[5]" ,
+  note (scale "ritusen" ("0(8,12)"+(slow 5 $ run 8)+7+(irand 4))) # s "midi" # midichan "[4,8]" ,
+  -- note (scale "ritusen" ("[0*4]"+(irand 8))) # s "midi" # midichan "4" # sus 0.2 # gain 0.8,
+  -- note (scale "ritusen" (off 0.25 (+"[2,4]") $"0(8,12)"+(cP "[]" "notes"))) # s "midi" # midichan "5" ,
+  s "~"
+]

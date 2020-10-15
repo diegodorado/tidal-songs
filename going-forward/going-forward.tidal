@@ -1,0 +1,105 @@
+let midi c = sound "midi" # midichan c # nudge (-0.1)
+    m1 = p "m1" . (|< midi 0)
+    m2 = p "m2" . (|< midi 1)
+    m3 = p "m3" . (|< midi 2)
+    m4 = p "m4" . (|< midi 3)
+    ns p = n (scale "dorian" p)
+
+
+let b = "[-1 2 0 4]/4"
+
+
+d1 $ s "bd:7*[8 16]" # shape 0.5 # speed (range 3 0.5 $ saw)
+
+
+d1 $ stack[
+  s "bd*2 <sn:3 cp>" # orbit 0 ,
+  s "~ sn" + dilei 0.5 0.125 0.5 # orbit 2 ,
+  s "~ perc*4" # n ("0" |+irand 8) ,
+  s "hh*8"
+]# shape 0.14
+
+
+d1 $ stack[
+  s "bd*2 ~ <sn:3 cp> ~" ,
+  s "~ sn:6" ,
+  s "~ perc*4" # n ("0" |+irand 8) ,
+  s "[hh oh*2]*4" + cut 7
+]# shape 0.14
+
+
+d1 $ stack[
+  s "bd*2 ~ <sn:3 cp> ~" ,
+  s "[hh oh*2]*2" + cut 7
+]
+
+
+d1 $ stack[
+  s "bd*2 ~!3" # orbit 0 ,
+  s "~ <sn:6 sn:5*2 sn:6 sn:6(7,8)?>" + dilei 0.5 0.125 0.5 # orbit 2 ,
+  s "perc*16?" # n ("0" |+irand 8) ,
+  s "[hh]*8" # n ("0*2" |+irand 8)  + cut 7
+]
+
+d1 $ stack[
+  s "bd*2" # orbit 2,
+  s "[hh <oh:1*2 oh>]*2" + cut 7  ]# shape 0.14
+
+d1 $ stack[
+    s "bd*2" # orbit 0,
+    s "~ sn:5*<1 1 1 8?>" # orbit 2,
+    s "[hh <perc:7 perc:10 perc:9 perc:8> <oh:1*2 oh> perc ]" + cut 7  ]# shape 0.14
+
+do
+  hush
+  m2 silence
+  m4 silence
+  m1 $ ns ("[0 <0 7*4>]"-8) # gain 1.1
+
+m2 $ ns (stut' "<4 3 2 4>" "<0.25 0.125>" (+"<4 7 [3 7]>") $ "[0 <0 7*4>]"-8) # gain 1.0
+
+m1 $ ns (stack[
+  off "0.25 0.125" (+4)$  fast "0.5 <1 0.25>" $ "[0 0 0 0 7 0 0 0]"+"[0]/4",
+  ("[0,2,4,6 7?, 8 9?]"+"[6 2 7 4]/4")-7]) # gain 1.05
+
+
+d5 $ degradeBy 0.2 $ n (scale "minPent" (round <$> (segment "<8>" $ slow "<0.5 2>" $  perlin*7-rand*2) )) # midi 1 # sus 2 + gain 0.55
+
+m2 $ ns ((shuffle 8 $ "[0 2 4 6]*2")+"[-1 2 0 4]/4") +gain 0.8 # sus 0.4
+
+m4 $ ns ((shuffle 8 $ "[0 2 4 6]*2")+"[-1 2 0 4]/4"-14) -- # sus 0.4
+
+m1 $ ns ("0"+b+0) # sus 0.5
+
+m2 $ ns ("0(3,8,<0 1 2 0>)"+(round <$> (segment "8 16" $ slow 4 $ perlin*8 + rand*3))+0)# legato 2
+
+m3 $ ns ("[0,2,4,6]"+b+0) # sus 0.5
+
+m1 silence
+
+m3 $ ns ("[0,2,4,6,8,10]"+b+7)
+  -- # sus 0.3
+  # sus 1.5
+
+do
+  hush
+  m1 $ ns ((("[0 7 12 16]"+b))) # sus 1.5
+  m3 $ ns ((("[0,2,4,6,8]"+b))) # sus 1.5
+    # cps (slow 8 $ sine*0.25+0.25) 
+
+
+hush
+
+d6 $ n (scale "dorian" (("[0,2,4,6 7 8 9,8 9 10 11,10 11]"+"[-1 2 0 4]/4"+7))) # midi 2 # sus 1.5
+
+d6 $ n (scale "dorian" (("[0 2 4 6]*2"+"[0,2]"+"[-1 2 0 4]/4"+7))) # midi 2 # sus 1.5
+
+d7 $ n (scale "dorian" (("[0]"+"-21"+"[6 2 7 4]/4"))) # midi 3 +sus 0.3 +gain 0.56
+
+d7 $ n (scale "dorian" (("[0 <~ 0> 7 <0 [6 7] -1> ]"+"-21"+"[6 2 7 4]/4"))) # midi 3
+
+m4 $ ns  ((("[0 ~ <[7 0] [ 7 .. 14]> <~ -1 [6 7] 4> ]"+"-21"+"[6 9 7 4]/4")))  # sus 0.5
+
+m4 $ ns ("[0*2 <~ [14*2 14*2?]> [7 0] <14 7 ~> ]"+"-21"+"[6 9 7 4]/4") # sus 0.2 # gain 1.1
+
+m4 $ ns ((("[0*2 [7]]"+"-21"+"[6 9 7 4]/4"))) # sus 0.2

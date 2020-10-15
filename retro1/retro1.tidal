@@ -1,0 +1,46 @@
+
+do
+  let d = scale "dorian"
+  let pat = "[0 0 2 3]/16"
+  let p = "[0 5 2 6]/8"
+  let chrd = "[0]/16"
+  d1 $ stack[
+    s "[<swbd [swbd*2 ~ ]> <swsn:3>]" # orbit 3 # room 0.2,
+    n "<1*4 1*6>" # s "feel" # gain 0.84,
+    -- n (run 4) # s "pingpong",
+    slow 2 $ n ("<0 [2 4]>"+(irand 5)) # cut 1 # s "chant" # shape 0.2 # gain 1.2,
+    n (d $ "{0 7 [7 14] 0 7}%2"+pat-7) # s "bass8" # shape 0.6 # gain 0.9,
+    --n (d $ "[~ 0!3]"+"[0 7 0]*2"+pat) # s "bass8" # shape 0.5,
+    -- note ((d $ (stut' 3 0.33 (+"2")) $ "0") +"0") # s "midi" # gain 0.8 # midichan 2,
+    --slow 2 $ note ((d $ "[< 0..7 7> <4 [6 5]> <<[7 10 5] 7> [6 5]> <12 14>]") +"0") # s "midi" # gain 1 # midichan "0",
+    slow 2 $ note ((d $ "[0,2,4,6]"+p) +"0") # s "midi" # midichan "[2,3]" # gain 0.6,
+    ---note ((d $ "[0!3]*2"+pat+chrd) +"[0]") # gain 0.94 # midichan 4 # s "midi",
+    --note ((d $ run 4)+"[12 0 24]/4") # s "midi" #midichan 2 # gain "1.2",
+    whenmod 16 8 (#gain 0) $ note (d $ "[~!2 0 1] [2 ~ <4 5 6 5> ~]"+"7")# s "midi" # midichan 5,
+    note (d $ "0 7(<3>,8)"+"[0,2,<11 10 9 8>,6]/2"+pat)# s "midi" # midichan 0 # gain 0.95,
+    --note (d $ "{0 7 6 4}%4"+pat) # s "midi" # midichan 5 # gain 0.95,
+    note (d $stut' 4 0.33 (+2) $ "{0 7 10}%8"+p) # s "midi" # midichan 4 # gain 0.6 # pan (slow 4 $ sine),
+    cc 0 7 127,
+    s "~" ]
+
+
+
+
+
+
+
+
+
+do
+  let d = toScale (Scales.aeolian)
+  let pat = "[0 -1 -2 -1]/16"
+  d1 $ stack[
+    whenmod 16 16 (const $ s "swsn:3*12" # speed (scale 2 1 $ slow 2 $ saw)) $ s "[[swbd swbd*3?] <swsn:3 swsn:0*3 swsn:3 swsn:3(7,8)?>]/2" # orbit 3 # room 0.25,
+    n "{2 1 2 1 [2 1]}%6" # s "feel" # gain 0.9,
+    n (d $ "[{0 [0 4] 7 0 7 0}%6]/2"+pat) # s "bass8" # shape 0.5 # gain 0.87,
+    note ( d $ "[2,4,6,8]*3"+pat) # s "midi" # sustain 0.2 # gain "0.56 0.4 0.45" ,
+    note ( d $ (stut' 3 0.22 (+"[2]")) $ "[0,4]*3"+"<7 8 9 10>"+pat) # s "midi" # sustain (scale 0.1 0.45 $ slow 2.3 $ tri)# midichan 2 # gain 0.72,
+    cc 2 74 (scale 20 100 $ slow 2.5 $ tri),
+    cc 2 71 (scale 50 10 $ slow 2.5 $ tri),
+    --note ( d $ (run 6)+"<0 7 4>") # s "midi" # midichan 3 # gain 0.9 ,
+    s "~" ]

@@ -1,0 +1,37 @@
+
+
+do
+  hush
+  let ns pat = note (scale "dorian" pat)
+      nsr pat = ns (round <$> pat)
+      b= "[0@2 2 <-1 3>]/8"
+      bass = "{0 7 0 0 [-1 0] 0 [6 7]}%4" 
+      melo =  "{0 5 6 8 3 ~!6 10}%3"
+  m3 $ ns ("[~ [0|7]!3]"+b |-7) 
+  d0 $ whenmod 16 14 ( const $ s "sn*8" #shape 0.2 # hpf 300 # n ("0*8"+ irand 8 ) # cut 4 # orbit 3) $ slow 1 $ s "[bd bd*2?] sn:5 "
+  d1 $ s "~ [hh|hh:4] oh:8 hh*2" # dilei 0.5 0.25 0.3
+  m1 $ ns ("[0,2,4,6,<10 9 8>]" +|b |-7)
+  m3 $ ns (every 2 (stut' "[2|3]" 0.25 (+7)) $"[0 ~ ~ [6 7]]"+b |-7) 
+  m4 $ ns ("{2 5 9 3 14 4 3 4}%1?" ) # sus 0.51 # gain 1.1
+  m2 $ nsr (mono $ slow 2 $ struct "1(<9 13>,16,<0 1 2>)" $ melo) # sus (slow 4 $ perlin* 0.5) # gain 1.15
+
+
+  d0 $ every 8 (const $ s "bd*8") $ silence
+
+  m2 $ sometimesBy 0.3 (off 0.25 (+12)) $ degrade $ ns (shuffle 4 $ ((* 2) $ (run 4))+b)  # gain (slow 4 $ 1+ perlin*0.3)
+
+  m6 $ ns (("<0 0.25 0.5>" ~>) $ "[0,2,4,6] ~"+7) # sus 0.3 # gain (slow 4 $ 1+ perlin*0.3)
+
+  
+
+  m2 $ nsr (mono $ slow 2 $ struct "1(<9 13>,16,<0 1 2>)" "[6|7|8]") # sus (slow 4 $ perlin* 0.5) # gain 1.1 
+  
+  m6 $ ns (off 0.5 (+2) $  slow 4 $ "[14..0] ~"+7)
+   
+
+  m2 $ nsr (mono $ slow 2 $ struct "1(<9 0 1 13>,16,<0 1 2>)" $ perlin*12+rand*2) # sus (slow 4 $ perlin* 0.5) # gain 1.15
+
+  m2 $ nsr (mono $ off 0.125 (+"<3 7>") $ slow 2 $ struct "1(<3 7>,8, <0 1 2>)" $ saw*16+rand*3-7) # sus (slow 4 $ perlin* 0.3) # gain 1.2
+
+  m6 $ nsr (mono $ (0.5 ~>) $ off 0.125 (+"<5 9>") $ slow 2 $ struct "1(<5 7>,8, <0 1 2>)" $ saw*16+rand*3) # gain 1.2
+

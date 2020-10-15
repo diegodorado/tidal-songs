@@ -1,0 +1,8 @@
+3c3
+<   let ns pat = note (scale "aeolian" pat)
+---
+>   let ns pat = note (scale "dorian" pat)
+6c6
+<   m6 $ ns ("[0,2,6,8,10]"+|b|+7) # sus 0.3
+---
+>   m6 $ ns ("[0,2]"+|b|+7) # sus 0.3
